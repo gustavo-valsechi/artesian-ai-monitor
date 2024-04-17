@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         if (!token && tokenStorage) setToken(tokenStorage)
         if (!user.id && userStorage) setUser(JSON.parse(userStorage))
 
-        if (_.includes(pathname, "auth")) router.push("/dashboard")
+        if (_.includes(pathname, "auth")) router.push("/monitor")
         // eslint-disable-next-line
     }, [token])
 

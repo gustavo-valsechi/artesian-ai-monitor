@@ -8,7 +8,7 @@ export const Container = styled.div`
     flex-direction: column;
     gap: 2rem;
 
-    .dashboard-label {
+    .monitor-label {
         color: ${({ theme }) => theme.transparent_6};
 
         span {
@@ -23,7 +23,9 @@ export const Container = styled.div`
         }
     }
 
-    .dashboard-content {
-
+    .monitor-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
     }
 `;

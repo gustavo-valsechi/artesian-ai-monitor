@@ -3,7 +3,6 @@
 import React from "react"
 import { Container } from "./styles"
 import { Label } from "../label"
-import { useTheme } from "../../../contexts/theme"
 import _ from "lodash"
 
 interface IDateTime {
@@ -21,7 +20,6 @@ interface IDateTime {
 }
 
 export function DateTime(props: IDateTime) {
-    const { theme } = useTheme()
 
     const onChange = (event: any) => {
         const value: any = event.target.value || ""
@@ -32,7 +30,7 @@ export function DateTime(props: IDateTime) {
     }
 
     return (
-        <Container className={props.className} error={props.error} theme={theme}>
+        <Container className={props.className} error={props.error}>
             {!!props.label && <Label>{props.label}{props.required ? "*" : ""}</Label>}
             <div className="input-content">
                 <input

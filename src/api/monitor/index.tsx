@@ -2,11 +2,11 @@ import { api } from "../../services"
 import { toast } from "react-hot-toast"
 import _ from "lodash"
 
-export async function getDashboards(credentials: any) {
+export async function getMonitors(credentials: any) {
     try {
-        const { data } = await api.get("dashboard")
+        // const { data } = await api.get("monitor")
 
-        console.log(data)
+        // console.log(data)
 
         return {
             content: [
@@ -22,12 +22,12 @@ export async function getDashboards(credentials: any) {
     }
 }
 
-export async function saveDashboard(body: any) {
+export async function saveMonitor(body: any) {
     try {
 
         // const req: any = {
-        //     "true": { method: "put", url: `dashboard/${body.id}` },
-        //     "false": { method: "post", url: "dashboard" },
+        //     "true": { method: "put", url: `monitor/${body.id}` },
+        //     "false": { method: "post", url: "monitor" },
         // }
 
         // const method = req[String(!!body.id)].method
@@ -44,9 +44,9 @@ export async function saveDashboard(body: any) {
     }
 }
 
-export async function removeDashboard(uuid: string) {
+export async function removeMonitor(uuid: string) {
     try {
-        // const { data } = await api.delete(`dashboard/${uuid}`)
+        // const { data } = await api.delete(`monitor/${uuid}`)
 
         toast.success("Gráfico removido com sucesso!")
 

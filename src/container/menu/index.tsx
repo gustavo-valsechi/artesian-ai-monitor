@@ -3,28 +3,39 @@
 import React from "react"
 import { Container } from "./styles"
 import { usePathname } from "next/navigation"
-import { Logo } from "@/components/logo"
+import { Logo } from "@/components"
 import { useAuth } from "@/contexts/auth"
 import Link from "next/link"
 import _ from "lodash"
+
+interface IProps {
+    show: boolean
+    profile: {
+        value: boolean
+        set: Function
+    }
+}
 
 interface INavigation {
     icon: string
     label: string
     route: string
+    amount?: number
 }
 
-export default function Menu(props: { show: boolean }) {
+export default function Menu(props: IProps) {
 
     const pathname = usePathname()
-    const { logout, user } = useAuth()
+    const { user } = useAuth()
 
     const navigation: Array<INavigation> = [
-        { icon: "fa-solid fa-chart-simple", label: "Dashboard", route: "/dashboard" },
+        { icon: "fa-solid fa-bullseye", label: "Monitoramento", route: "/monitor" },
+        { icon: "fa-solid fa-chart-simple", label: "Leitura de variáveis", route: "/variables" },
+        { icon: "fa-solid fa-bell", label: "Alertas", route: "/alerts", amount: 2 },
     ]
 
     return (
-        <Container {...props}>
+        <Container show={props.show}>
             <div>
                 <header>
                     <Logo />
@@ -35,14 +46,18 @@ export default function Menu(props: { show: boolean }) {
                             <li key={index}>
                                 <Link href={data.route}>
                                     <div className={`nav-item ${_.includes(pathname, data.route) ? "target" : ""}`}>
-                                        <div>
+                                        <div className="nav-item-content">
                                             <i aria-hidden className={data.icon} />
                                         </div>
-                                        <div>
-                                            {data.label}
+                                        <div className="nav-item-content">
+                                            <span>{data.label}</span>
+                                            {!!data.amount &&
+                                                <div className="nav-item-amount">
+                                                    {data.amount}
+                                                </div>}
                                         </div>
                                         {_.includes(pathname, data.route) &&
-                                            <div>
+                                            <div className="nav-item-content">
                                                 <i aria-hidden className="fa-solid fa-angle-right" />
                                             </div>}
                                     </div>
@@ -61,8 +76,8 @@ export default function Menu(props: { show: boolean }) {
                             <label>{user.email}</label>
                         </div>
                     </div>
-                    <button onClick={logout}>
-                        <i aria-hidden className="fa-solid fa-right-from-bracket" />
+                    <button onClick={() => props.profile.set(true)} title="Perfil">
+                        <i aria-hidden className="fa-solid fa-bars" />
                     </button>
                 </div>
             </footer>

@@ -1,10 +1,17 @@
+"use client"
+
 import React from 'react'
 import { Container } from './styles'
 import { ApexOptions } from 'apexcharts'
-import ApexChart from "react-apexcharts"
+import { useTheme } from '@/contexts/theme'
+import dynamic from 'next/dynamic'
 import _ from 'lodash'
 
+const ApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
+
 export default function Chart(props: any) {
+
+    const { content: themeContent } = useTheme()
 
     const content = [
         { timestamp: "04/04/2024 15:40", engineOne: _.random(true), engineTwo: _.random(true), engineThree: _.random(true) },
@@ -21,9 +28,10 @@ export default function Chart(props: any) {
         dataLabels: { enabled: false },
         stroke: { curve: 'smooth', width: 2, },
         fill: { gradient: { opacityFrom: 0.9, opacityTo: 0.8 } },
-        xaxis: { categories: _.map(content, (data) => data.timestamp) },
         legend: { show: false },
-        chart: { toolbar: { show: false } }
+        chart: { toolbar: { show: false } },
+        xaxis: { categories: _.map(content, (data) => data.timestamp), labels: { style: { colors: _.map(content, () => themeContent.transparent_6) } } },
+        yaxis: { labels: { style: { colors: _.map(content, () => themeContent.transparent_6) } } },
     }
 
     const series = [
@@ -43,11 +51,20 @@ export default function Chart(props: any) {
 
     return (
         <Container>
+            <div className="chart-legend">
+                {_.map(series, (data, index) =>
+                    <div key={data.name} className="legend">
+                        <div style={{ background: options.colors?.[index] || "rgb(0, 0, 0, 0.3)" }} />
+                        <label>{data.name}</label>
+                    </div>
+                )}
+            </div>
             <ApexChart
                 options={options}
                 series={series}
                 type="area"
                 height={300}
+                width="100%"
             />
         </Container>
     )

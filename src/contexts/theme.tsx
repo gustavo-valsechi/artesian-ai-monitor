@@ -2,6 +2,8 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react"
 import { ThemeProvider } from "styled-components"
+import convert from 'color-convert'
+import _ from 'lodash'
 
 export interface ITheme {
     [key: string]: {
@@ -20,6 +22,7 @@ export interface ITheme {
         transparent_1: string
         transparent_08: string
         transparent_05: string
+        [key: string]: any
     }
 }
 
@@ -41,41 +44,47 @@ const ThemeProviderContainer = ({ children }: { children: React.ReactNode }) => 
         light: {
             primary: "#fff",
             secondary: "#5869da",
-            tertiary: "rgb(98, 157, 253, 0.2)",
+            tertiary: "#629dfd33",
             positive: "#65c965",
             negative: "#FF334E",
-            transparent_8: "rgb(0, 0, 0, 0.8)",
-            transparent_7: "rgb(0, 0, 0, 0.7)",
-            transparent_6: "rgb(0, 0, 0, 0.6)",
-            transparent_5: "rgb(0, 0, 0, 0.5)",
-            transparent_4: "rgb(0, 0, 0, 0.4)",
-            transparent_3: "rgb(0, 0, 0, 0.3)",
-            transparent_2: "rgb(0, 0, 0, 0.2)",
-            transparent_1: "rgb(0, 0, 0, 0.1)",
-            transparent_08: "rgb(0, 0, 0, 0.08)",
-            transparent_05: "rgb(0, 0, 0, 0.05)",
+            transparent_8: "#000000cc",
+            transparent_7: "#000000b3",
+            transparent_6: "#00000099",
+            transparent_5: "#00000080",
+            transparent_4: "#00000066",
+            transparent_3: "#0000004d",
+            transparent_2: "#00000033",
+            transparent_1: "#0000001a",
+            transparent_08: "#00000014",
+            transparent_05: "#0000000d",
         },
         dark: {
             primary: "#333",
             secondary: "#5869da",
-            tertiary: "rgb(98, 157, 253, 0.2)",
+            tertiary: "#629dfd33",
             positive: "#65c965",
             negative: "#FF334E",
-            transparent_8: "rgb(255, 255, 255, 0.8)",
-            transparent_7: "rgb(255, 255, 255, 0.7)",
-            transparent_6: "rgb(255, 255, 255, 0.6)",
-            transparent_5: "rgb(255, 255, 255, 0.5)",
-            transparent_4: "rgb(255, 255, 255, 0.4)",
-            transparent_3: "rgb(255, 255, 255, 0.3)",
-            transparent_2: "rgb(255, 255, 255, 0.2)",
-            transparent_1: "rgb(255, 255, 255, 0.1)",
-            transparent_08: "rgb(255, 255, 255, 0.08)",
-            transparent_05: "rgb(255, 255, 255, 0.05)",
+            transparent_8: "#ffffffcc",
+            transparent_7: "#ffffffb3",
+            transparent_6: "#ffffff99",
+            transparent_5: "#ffffff80",
+            transparent_4: "#ffffff66",
+            transparent_3: "#ffffff4d",
+            transparent_2: "#ffffff33",
+            transparent_1: "#ffffff1a",
+            transparent_08: "#ffffff14",
+            transparent_05: "#ffffff0d",
         }
     }
 
     return (
-        <ThemeContext.Provider value={{ theme, setTheme }}>
+        <ThemeContext.Provider
+            value={{
+                theme,
+                setTheme,
+                content: THEME_CONTENT[theme]
+            }}
+        >
             <ThemeProvider theme={THEME_CONTENT[theme]}>
                 {children}
             </ThemeProvider>

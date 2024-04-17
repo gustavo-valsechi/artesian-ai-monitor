@@ -76,7 +76,7 @@ export const Container: any = styled.aside<{ show: boolean }>`
                     }
                 }
 
-                div:first-child {
+                .nav-item-content:first-child {
                     flex: .15;
 
                     @media(max-width: 650px) {
@@ -88,15 +88,30 @@ export const Container: any = styled.aside<{ show: boolean }>`
                     }
                 }
 
-                div:nth-child(2) {
+                .nav-item-content:nth-child(2) {
                     flex: .70;
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
 
                     @media(max-width: 650px) {
                         display: none;
                     }
+
+                    .nav-item-amount {
+                        min-width: 1rem;
+                        height: 1rem;
+                        border-radius: 1rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: .6rem;
+                        color: #fff;
+                        background: ${({ theme }) => theme.negative};
+                    }
                 }
 
-                div:nth-child(3) {
+                .nav-item-content:nth-child(3) {
                     flex: .15;
                     display: flex;
                     align-items: center;
@@ -111,15 +126,12 @@ export const Container: any = styled.aside<{ show: boolean }>`
     }
 
     footer {
-        padding: 1rem;
-
         .profile {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: .8rem 1rem;
-            border-radius: 5px;
-            background: ${({ theme }) => theme.transparent_05};
+            border-top: 1px solid ${({ theme }) => theme.transparent_05};
             color: ${({ theme }) => theme.transparent_6};
 
             @media(max-width: 650px) {
@@ -149,7 +161,7 @@ export const Container: any = styled.aside<{ show: boolean }>`
                     }
 
                     label {
-                        width: 8.5rem;
+                        width: 10rem;
                         white-space: nowrap;
                         overflow: hidden;
                         text-overflow: ellipsis;

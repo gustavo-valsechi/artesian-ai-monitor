@@ -22,7 +22,7 @@ export default function Login(props: any) {
 
         if (token) {
             setToken(token)
-            router.push("/dashboard")
+            router.push("/monitor")
         }
 
         setLoading(false)
