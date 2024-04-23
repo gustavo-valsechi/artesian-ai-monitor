@@ -6,6 +6,7 @@ import { Container } from "./styles"
 // import { getMonitors, removeMonitor } from "@/api/monitor"
 
 import Alert from "./alert"
+import Motors from "./motors"
 import Chart from "./chart"
 
 export default function MonitorClient({ data }: any) {
@@ -16,6 +17,7 @@ export default function MonitorClient({ data }: any) {
       </div>
       <div className="monitor-content">
         <Alert />
+        <Motors />
         <Chart />
       </div>
     </Container>

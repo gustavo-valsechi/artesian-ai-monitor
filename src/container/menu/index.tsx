@@ -29,8 +29,7 @@ export default function Menu(props: IProps) {
     const { user } = useAuth()
 
     const navigation: Array<INavigation> = [
-        { icon: "fa-solid fa-bullseye", label: "Monitoramento", route: "/monitor" },
-        { icon: "fa-solid fa-chart-simple", label: "Leitura de variáveis", route: "/variables" },
+        { icon: "fa-solid fa-chart-simple", label: "Monitoramento", route: "/monitor" },
         { icon: "fa-solid fa-bell", label: "Alertas", route: "/alerts", amount: 2 },
     ]
 
