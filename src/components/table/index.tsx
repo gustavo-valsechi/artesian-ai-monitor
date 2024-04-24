@@ -4,29 +4,26 @@ import React from "react"
 import { Container } from "./styles"
 import { LoadingBar } from "../loading/bar"
 import { Paginate } from "./paginate"
-import Refactoring from "../../utils"
 import Image from "next/image"
 import _ from "lodash"
 
+interface IAction {
+  disabled?: boolean
+  position?: string
+  function: (data?: any) => any
+  icon?: string
+  label?: string
+  tooltip?: string
+}
+
 interface IColumn {
+  name?: string
   style?: object
-  action?: {
-    disabled?: boolean
-    position?: string
-    function: (data?: any) => any
-    icon?: string
-    label?: string
-  }
+  action?: IAction
 }
 
 interface IRow {
-  actions?: Array<{
-    disabled?: boolean
-    position?: string
-    function: (data?: any) => any
-    icon?: string
-    label?: string
-  }>
+  actions?: Array<IAction>
   image?: any
   style?: object
   mask?: any
@@ -59,7 +56,32 @@ interface ITable {
 
 export function Table(props: ITable) {
 
-  const limit = (value: string) => Refactoring.format.stringLimit(String(value), 30)
+  const rowContent = (data: any, option: any) => {
+
+    const row = option.row as IRow || {}
+    const content = data[row.name as string] || data
+
+    let body: any
+
+    while (!body) {
+
+      if (_.isString(row)) body = data[row]
+      if (_.isString(content)) body = content
+      if (_.isFunction(row.mask)) body = row.mask(content)
+      if (_.isFunction(row.custom)) body = row.custom(content)
+
+      body = body ?? "---"
+    }
+
+    return (
+      <div
+        className="row-content"
+        title={_.isString(body) ? body : ""}
+      >
+        {body}
+      </div>
+    )
+  }
 
   return (
     <Container notFound={!props.content?.length && !props.loading}>
@@ -91,7 +113,7 @@ export function Table(props: ITable) {
                           </p>
                         )}
                       </button>
-                      : _.isString(option.column) ? option.column : ""}
+                      : _.isString((option.column as IColumn)?.name || option.column) ? (option.column as any)?.name || option.column : ""}
                   </div>
                 </th>
               )}
@@ -140,6 +162,7 @@ export function Table(props: ITable) {
                                 `}
                                 onClick={() => action.function ? action.function(data) : null}
                                 disabled={action.disabled}
+                                data-tooltip={action.tooltip}
                               >
                                 <i aria-hidden className={action.icon || "fa-solid fa-eye"} />
                                 {!!action.label && (
@@ -162,17 +185,16 @@ export function Table(props: ITable) {
                                         : (option.row as IRow)?.image(data)}
                                       alt=""
                                     />
-                                    : <i aria-hidden className={(option.row as { image: { icon: string } })?.image?.icon || "fa-solid fa-circle-user"} />}
+                                    : <i
+                                      aria-hidden
+                                      className={
+                                        _.isFunction((option.row as { image: { icon: any } })?.image?.icon)
+                                          ? (option.row as { image: { icon: any } }).image.icon(data) || "fa-solid fa-circle-user"
+                                          : (option.row as { image: { icon: string } })?.image?.icon || "fa-solid fa-circle-user"
+                                      }
+                                    />}
                             </div>
-                            : <div className="row-content">
-                              {!!(option.row as IRow)?.mask
-                                ? (option.row as IRow)?.mask(data[(option.row as any)?.name]) || "---"
-                                : !!(option.row as IRow)?.custom
-                                  ? (option.row as any)?.custom(data[(option.row as any)?.name] || data) || "---"
-                                  : !!data[(option.row as IRow)?.name || (option.row as string)]
-                                    ? limit(data[(option.row as IRow)?.name || (option.row as string)])
-                                    : "---"}
-                            </div>}
+                            : rowContent(data, option)}
                       </div>
                     </td>
                   ))}

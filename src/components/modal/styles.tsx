@@ -9,7 +9,7 @@ export const Container = styled.div`
   right: 0;
   display: flex !important;
   position: fixed;
-  z-index: ${(props: any) => (props.toggle ? "999" : "-1")};
+  z-index: ${(props: any) => (props.toggle ? "9" : "-1")};
   flex-direction: ${(props: any) => (props.left ? "row-reverse" : "row")} !important;
   transform: ${(props: any) => (props.toggle ? "translateX(0%)" : "translateX(100%)")};
   transition: ${(props: any) => (props.toggle ? ".0s ease .0s" : ".3s ease .3s")};
@@ -126,7 +126,7 @@ export const Container = styled.div`
         width: 1rem;
         height: 1rem;
         cursor: pointer;
-        z-index: 999;
+        z-index: 9;
         display: flex;
         align-items: center;
         justify-content: center;

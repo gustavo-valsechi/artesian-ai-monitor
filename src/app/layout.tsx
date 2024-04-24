@@ -6,6 +6,7 @@ import GlobalStyles from "./global.styles"
 import StyledComponentsRegistry from "@/tools/registry"
 
 import Container from "../container"
+import { TooltipProvider } from "@/contexts/tooltip"
 
 export const metadata: Metadata = {
     title: "Artesian AI Monitor",
@@ -31,9 +32,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                                 reverseOrder={false}
                                 containerStyle={{ fontSize: ".85rem", fontWeight: "500" }}
                             />
-                            <Container>
-                                {children}
-                            </Container>
+                            <TooltipProvider>
+                                <Container>
+                                    {children}
+                                </Container>
+                            </TooltipProvider>
                         </AuthProvider>
                     </ThemeProvider>
                 </StyledComponentsRegistry>

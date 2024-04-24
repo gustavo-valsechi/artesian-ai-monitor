@@ -2,7 +2,6 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react"
 import { ThemeProvider } from "styled-components"
-import convert from 'color-convert'
 import _ from 'lodash'
 
 export interface ITheme {
@@ -22,6 +21,7 @@ export interface ITheme {
         transparent_1: string
         transparent_08: string
         transparent_05: string
+        tooltip: string
         [key: string]: any
     }
 }
@@ -57,6 +57,7 @@ const ThemeProviderContainer = ({ children }: { children: React.ReactNode }) => 
             transparent_1: "#0000001a",
             transparent_08: "#00000014",
             transparent_05: "#0000000d",
+            tooltip: "#f2f2f2"
         },
         dark: {
             primary: "#333",
@@ -74,6 +75,7 @@ const ThemeProviderContainer = ({ children }: { children: React.ReactNode }) => 
             transparent_1: "#ffffff1a",
             transparent_08: "#ffffff14",
             transparent_05: "#ffffff0d",
+            tooltip: "#3d3d3d"
         }
     }
 

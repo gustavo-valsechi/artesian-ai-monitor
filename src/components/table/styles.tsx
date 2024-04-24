@@ -193,6 +193,7 @@ export const Container = styled.div<IProps>`
                         padding: 0;
                         font-size: .8rem;
                         font-weight: 400;
+                        position: relative;
 
                         &:first-child {
                             .table-temp {
@@ -206,6 +207,16 @@ export const Container = styled.div<IProps>`
                                 border-top-right-radius: 5px;
                                 border-bottom-right-radius: 5px;
                             }
+                        }
+
+                        .row-content {
+                            position: absolute;
+                            left: 0;
+                            right: 0;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            padding: 0.8rem 1.3rem;
                         }
                     }
 

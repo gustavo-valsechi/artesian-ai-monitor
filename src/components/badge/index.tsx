@@ -2,6 +2,7 @@
 
 import React from "react"
 import { Container } from "./styles"
+import _ from "lodash"
 
 interface IBadge {
   value: string
@@ -10,15 +11,16 @@ interface IBadge {
 export function Badge(props: IBadge) {
 
   const status: any = {
-    ENVIADO: "positive",
-    ENTREGUE: "positive",
-    ABERTO: "positive",
-    FALHA: "negative",
+    ESTAVEL: "positive",
+    INSTAVEL: "negative",
+    REGULAR: "negative",
   }
 
   return (
     <Container color={status[props.value]}>
-      <div>{props.value}</div>
+      <div className="content">
+        <div>{_.lowerCase(props.value)}</div>
+      </div>
     </Container>
   )
 }

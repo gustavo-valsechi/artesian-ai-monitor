@@ -31,7 +31,7 @@ export default function Profile(props: IProps) {
             <Container>
                 <div className="profile-header">
                     <div className="profile-header-avatar">
-                        <i className="fa-solid fa-user-circle" />
+                        <i aria-hidden className="fa-solid fa-user-circle" />
                     </div>
                 </div>
                 <div className="profile-body">
@@ -42,7 +42,7 @@ export default function Profile(props: IProps) {
                     <div className="profile-menu">
                         {_.map(menu, (data, index) =>
                             <div key={index} className="profile-menu-item" onClick={data.function}>
-                                <div><i className={data.icon} /></div>
+                                <div><i aria-hidden className={data.icon} /></div>
                                 <label>{data.label}</label>
                             </div>
                         )}
