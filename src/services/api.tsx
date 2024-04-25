@@ -1,9 +1,5 @@
 import axios from "axios"
 
 export const api = axios.create({
-    baseURL: "http://localhost:8080/api",
-    auth: {
-        username: 'user',
-        password: 'password'
-    }
+    baseURL: "https://i4-0-artesian-ai-monitor.onrender.com"
 })

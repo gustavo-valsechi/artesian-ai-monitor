@@ -2,7 +2,7 @@ import { getMonitors } from "@/api/monitor"
 
 import Client from "./client"
 
-export default async function AlertServer() {
+export default async function MonitorServer() {
 
     const monitors = await getMonitors({
         offset: 0,

@@ -1,11 +1,14 @@
 "use client"
 
 import React, { createContext, useContext, useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
 import _ from 'lodash'
 
 const TooltipContext = createContext<any>({})
 
 const TooltipProviderContainer = ({ children }: { children: React.ReactNode }) => {
+
+    const pathname = usePathname()
 
     const [tooltips, setTooltips] = useState<any>([])
 
@@ -39,7 +42,7 @@ const TooltipProviderContainer = ({ children }: { children: React.ReactNode }) =
                 setTooltips(_.filter(tooltips, (data) => JSON.stringify(data) === JSON.stringify(getContent(target))))
             })
         })
-    }, [])
+    }, [pathname])
 
     return (
         <TooltipContext.Provider

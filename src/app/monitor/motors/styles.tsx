@@ -5,8 +5,10 @@ export const Container = styled.div`
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
+    flex-wrap: wrap;
 
     .content {
+        flex: 1;
         display: flex;
         padding: 1rem;
         background: ${({ theme }) => theme.transparent_05};

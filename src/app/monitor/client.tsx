@@ -18,7 +18,10 @@ export default function MonitorClient({ data }: any) {
       <div className="monitor-content">
         <Alert />
         <Motors />
-        <Chart />
+        <Chart label="Situação" />
+        <Chart label="Frequência" />
+        <Chart label="Tensão" />
+        <Chart label="Corrente" />
       </div>
     </Container>
   )

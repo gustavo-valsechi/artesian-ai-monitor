@@ -1,31 +1,28 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
+export const Container = styled.div<{ toggle: boolean }>`
     background-color: ${({ theme }) => theme.transparent_05};
     border-radius: 5px;
-    padding: 2rem 1rem .5rem;
 
-    .chart-legend {
+    .chart-header {
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
+        padding: 1rem 1.3rem;
+        color: ${({ theme }) => theme.transparent_6};
+        border-bottom: 1px solid ${(props) => props.toggle ? props.theme.transparent_05 : 'transparent'};
+        cursor: pointer;
 
-        .legend {
+        .chart-header-label {
             display: flex;
             align-items: center;
             gap: .5rem;
-
-            div {
-                width: 1.5rem;
-                height: 1.5rem;
-                border-radius: 5px;
-            }
-
-            label {
-                font-size: .9rem;
-                font-weight: 500;
-                color: ${({ theme }) => theme.transparent_6};
-            }
+            font-size: .9rem;
+            font-weight: 600;
         }
+    }
+
+    .chart-body {
+        padding: .5rem 1rem;
     }
 `;

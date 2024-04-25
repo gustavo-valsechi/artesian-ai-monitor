@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React, { useState } from 'react'
 import { Container } from './styles'
 import { ApexOptions } from 'apexcharts'
 import { useTheme } from '@/contexts/theme'
@@ -12,6 +12,8 @@ const ApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
 export default function Chart(props: any) {
 
     const { content: themeContent } = useTheme()
+
+    const [toggle, setToggle] = useState(false)
 
     const content = [
         { timestamp: "04/04/2024 15:40", engineOne: _.random(true), engineTwo: _.random(true), engineThree: _.random(true) },
@@ -50,22 +52,30 @@ export default function Chart(props: any) {
     ]
 
     return (
-        <Container>
-            <div className="chart-legend">
-                {_.map(series, (data, index) =>
-                    <div key={data.name} className="legend">
-                        <div style={{ background: options.colors?.[index] || "rgb(0, 0, 0, 0.3)" }} />
-                        <label>{data.name}</label>
-                    </div>
-                )}
+        <Container toggle={toggle}>
+            <div 
+                className="chart-header"
+                onClick={() => setToggle(!toggle)}
+            >
+                <div className="chart-header-label">
+                    {!!props.icon && <i aria-hidden className={props.icon} />}
+                    <span>{props.label}</span>
+                </div>
+                <i 
+                    aria-hidden 
+                    className={toggle ? "fa-solid fa-angle-up" : "fa-solid fa-angle-down"} 
+                />
             </div>
-            <ApexChart
-                options={options}
-                series={series}
-                type="area"
-                height={300}
-                width="100%"
-            />
+            {toggle &&
+                <div className="chart-body">
+                    <ApexChart
+                        options={options}
+                        series={series}
+                        type="area"
+                        height={200}
+                        width="100%"
+                    />
+                </div>}
         </Container>
     )
 }

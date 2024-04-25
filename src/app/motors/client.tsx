@@ -8,7 +8,7 @@ import alerts from "./content.json"
 
 // import { getMonitors, removeMonitor } from "@/api/monitor"
 
-export default function AlertClient({ data }: any) {
+export default function MonitorClient({ data }: any) {
 
   const [modal, setModal] = useState({ is: false, content: {} })
   const [page, setPage] = useState(0)

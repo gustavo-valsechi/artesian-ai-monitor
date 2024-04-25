@@ -2,15 +2,14 @@ import { api } from "../../services"
 import { toast } from "react-hot-toast"
 import _ from "lodash"
 
-export async function login(credentials: any) {
+export async function login(credentials: { username: string, password: string }) {
     try {
-        // const { data } = await api.get("user")
+        const { data } = await api.post("auth", credentials)
+        console.log(data);
 
-        // const user = _.find(data, (content) => content.senha === credentials.password)
+        if (!data?.access_token) throw new Error("Usuário ou senha inválida, verifique e tente novamente")
 
-        // if (!user) throw new Error("E-mail ou senha inválida, tente novamente")
-
-        const token = Buffer.from(JSON.stringify(credentials)).toString("base64")
+        const token = data.access_token
 
         sessionStorage.setItem("@token", token)
         sessionStorage.setItem("@user", JSON.stringify({

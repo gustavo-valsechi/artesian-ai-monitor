@@ -18,8 +18,19 @@ export default function Profile(props: IProps) {
     const { logout, user } = useAuth()
 
     const menu = [
-        { icon: "fa-solid fa-user", label: "Alterar perfil", function: () => { } },
-        { icon: "fa-solid fa-arrow-right-from-bracket", label: "Sair", function: logout },
+        { 
+            icon: "fa-solid fa-user", 
+            label: "Alterar perfil", 
+            function: () => { } 
+        },
+        { 
+            icon: "fa-solid fa-arrow-right-from-bracket", 
+            label: "Sair", 
+            function: () => {
+                logout()
+                props.toggle.set(false)
+            } 
+        },
     ]
 
     return (

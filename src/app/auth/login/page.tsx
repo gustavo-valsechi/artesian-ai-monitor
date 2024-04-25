@@ -38,9 +38,9 @@ export default function Login(props: any) {
                         onSubmit={onSubmit}
                         inputs={[
                             {
-                                label: "E-mail",
-                                name: "email",
-                                validation: z.string({ required_error: "Campo obrigatório!" }).email("E-mail inválido!"),
+                                label: "Usuário",
+                                name: "username",
+                                validation: z.string({ required_error: "Campo obrigatório!" }),
                                 maxLength: 255
                             },
                             {
