@@ -4,12 +4,14 @@ import _ from "lodash"
 
 export async function login(credentials: { username: string, password: string }) {
     try {
-        const { data } = await api.post("auth", credentials)
-        console.log(data);
+        // const { data } = await api.post("auth", credentials)
+        // console.log(data);
 
-        if (!data?.access_token) throw new Error("Usuário ou senha inválida, verifique e tente novamente")
+        // if (!data?.access_token) throw new Error("Usuário ou senha inválida, verifique e tente novamente")
 
-        const token = data.access_token
+        // const token = data.access_token
+
+        const token = "ifnienfienfiuernierni"
 
         sessionStorage.setItem("@token", token)
         sessionStorage.setItem("@user", JSON.stringify({

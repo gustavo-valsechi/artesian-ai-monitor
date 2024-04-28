@@ -1,6 +1,7 @@
 {
   "name": "artesian-ai-monitor",
   "version": "1.0.0",
+  "license": "UNLICENSED",
   "scripts": {
     "dev": "next dev -p 8081",
     "build": "next build",

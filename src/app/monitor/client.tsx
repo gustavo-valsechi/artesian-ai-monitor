@@ -7,7 +7,7 @@ import { Container } from "./styles"
 
 import Alert from "./alert"
 import Motors from "./motors"
-import Chart from "./chart"
+import Variable from "./variable"
 
 export default function MonitorClient({ data }: any) {
   return (
@@ -18,10 +18,9 @@ export default function MonitorClient({ data }: any) {
       <div className="monitor-content">
         <Alert />
         <Motors />
-        <Chart label="Situação" />
-        <Chart label="Frequência" />
-        <Chart label="Tensão" />
-        <Chart label="Corrente" />
+        <Variable icon="fa-solid fa-wave-square" label="Frequência" />
+        <Variable icon="fa-solid fa-wave-square" label="Tensão" />
+        <Variable icon="fa-solid fa-wave-square" label="Corrente" />
       </div>
     </Container>
   )

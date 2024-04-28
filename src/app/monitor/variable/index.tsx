@@ -15,7 +15,7 @@ export default function Chart(props: any) {
 
     const [toggle, setToggle] = useState(false)
 
-    const content = [
+    const content = props.data?.content || [
         { timestamp: "04/04/2024 15:40", engineOne: _.random(true), engineTwo: _.random(true), engineThree: _.random(true) },
         { timestamp: "04/04/2024 15:45", engineOne: _.random(true), engineTwo: _.random(true), engineThree: _.random(true) },
         { timestamp: "04/04/2024 15:50", engineOne: _.random(true), engineTwo: _.random(true), engineThree: _.random(true) },
@@ -53,7 +53,7 @@ export default function Chart(props: any) {
 
     return (
         <Container toggle={toggle}>
-            <div 
+            <div
                 className="chart-header"
                 onClick={() => setToggle(!toggle)}
             >
@@ -61,9 +61,9 @@ export default function Chart(props: any) {
                     {!!props.icon && <i aria-hidden className={props.icon} />}
                     <span>{props.label}</span>
                 </div>
-                <i 
-                    aria-hidden 
-                    className={toggle ? "fa-solid fa-angle-up" : "fa-solid fa-angle-down"} 
+                <i
+                    aria-hidden
+                    className={toggle ? "fa-solid fa-angle-up" : "fa-solid fa-angle-down"}
                 />
             </div>
             {toggle &&

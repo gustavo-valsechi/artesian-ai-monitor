@@ -1,9 +1,8 @@
 "use client"
 
-import { ITheme } from "@/contexts/theme"
 import { createGlobalStyle } from "styled-components"
 
-const GlobalStyle = createGlobalStyle<{ theme: ITheme }>`
+const GlobalStyle = createGlobalStyle`
     html, body, input, select, textarea, div, button {
         font-family: "Poppins", sans-serif !important;
         -webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
