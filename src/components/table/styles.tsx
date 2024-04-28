@@ -94,6 +94,7 @@ export const Container = styled.div<IProps>`
                         display: flex;
                         align-items: center;
                         justify-content: flex-end;
+                        gap: .5rem;
                     }
 
                     .button {

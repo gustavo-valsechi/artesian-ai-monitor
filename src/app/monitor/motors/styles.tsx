@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-between;
     gap: 1rem;
     flex-wrap: wrap;
@@ -14,7 +14,6 @@ export const Container = styled.div`
         background: ${({ theme }) => theme.transparent_05};
         border-radius: 5px;
         width: 100%;
-        height: 100%;
 
         .content-left {
             width: 10rem;
@@ -63,6 +62,7 @@ export const Container = styled.div`
                 }
 
                 .content-status {
+                    flex-basis: 6rem;
                     padding: .3rem 1rem;
                     border-radius: 5px;
                     position: relative;
@@ -71,6 +71,7 @@ export const Container = styled.div`
                     font-size: .75rem;
                     font-weight: 600;
                     text-transform: capitalize;
+                    text-align: center;
 
                     &::before {
                         content: "";
@@ -103,7 +104,7 @@ export const Container = styled.div`
 
             .content-footer {
                 display: flex;
-                align-items: flex-end;
+                align-items: flex-start;
                 justify-content: space-between;
                 gap: 1rem;
 

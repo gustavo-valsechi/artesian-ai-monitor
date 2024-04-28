@@ -1,16 +1,29 @@
 [
     {
-        "id": "1",
-        "title": "Motor 1 com variação na vibração",
-        "message": "Ocorreu uma variação brusca no Motor 1 na leitura da vibração, verifique se os componentes dele estão funcionando adequadamente",
-        "read": true,
-        "status": "INSTAVEL"
+        "name": "Motor 1",
+        "model": "MotorX-5000",
+        "power": 3300,
+        "voltage": 220,
+        "current": 15,
+        "frequency": 60,
+        "status": "DESATIVADO"
     },
     {
-        "id": "2",
-        "title": "Motor 3 com variação na corrente",
-        "message": "Ocorreu uma variação brusca no Motor 1 na leitura da corrente, verifique se o eixo do motor esta lubrificado adequadamente ou se o cabeamento esta isolado de forma correta",
-        "read": false,
-        "status": "INSTAVEL"
+        "name": "Motor 2",
+        "model": "MotorY-7000",
+        "power": 3300,
+        "voltage": 220,
+        "current": 15,
+        "frequency": 60,
+        "status": "ATIVO"
+    },
+    {
+        "name": "Motor 3",
+        "model": "MotorZ-10000",
+        "power": 3300,
+        "voltage": 220,
+        "current": 15,
+        "frequency": 60,
+        "status": "DESATIVADO"
     }
 ]

@@ -12,9 +12,6 @@ import Variable from "./variable"
 export default function MonitorClient({ data }: any) {
   return (
     <Container>
-      <div className="monitor-label">
-        <span>Monitoramento</span>
-      </div>
       <div className="monitor-content">
         <Alert />
         <Motors />

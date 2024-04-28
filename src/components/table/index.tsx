@@ -25,7 +25,7 @@ interface IColumn {
 interface IRow {
   actions?: Array<IAction>
   image?: any
-  style?: object
+  style?: any
   mask?: any
   custom?: (data: any) => React.ReactNode
   name?: string
@@ -149,7 +149,11 @@ export function Table(props: ITable) {
                           ${(option.row as IRow)?.actions ? "action" : ""} 
                           ${(option.row as IRow)?.image ? "image" : ""}
                         `}
-                        style={(option.row as IRow)?.style}
+                        style={
+                          _.isFunction((option.row as IRow)?.style)
+                            ? (option.row as IRow).style(data, option)
+                            : (option.row as IRow)?.style
+                        }
                       >
                         {!!(option.row as IRow)?.actions
                           ? <div className="actions">

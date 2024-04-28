@@ -1,6 +1,8 @@
+"use client"
+
 import _ from "lodash"
 
-export default class Refactoring {
+export default class Utils {
     static format = {
         stringLimit(value: string, limit: number) {
             if (!value) return ""
@@ -40,6 +42,31 @@ export default class Refactoring {
             }
 
             return new Intl.NumberFormat(locale, { minimumFractionDigits: 2 }).format(value)
+        },
+
+        property: (data: { [key: string]: any }) => {
+            if (!_.isObject(data) || _.isArray(data)) return data
+
+            const properties: any = {}
+
+            const sufix = {
+                frequency: "hz",
+                power: "W",
+                voltage: "V",
+                current: "A",
+            }
+
+            for (const key in data) {
+                if (!sufix[key]) continue
+
+                const value = Number(data[key] || 0)
+
+                if (_.isNaN(value)) continue
+
+                properties[key] = (data[key] ?? "---") + sufix[key]
+            }
+
+            return properties
         },
 
     }

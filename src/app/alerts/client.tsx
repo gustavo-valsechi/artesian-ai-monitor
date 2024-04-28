@@ -40,9 +40,6 @@ export default function AlertClient({ data }: any) {
 
   return (
     <Container>
-      <div className="monitor-label">
-        <span>Alertas</span>
-      </div>
       <div className="monitor-content">
         <Table
           loading={loading}
@@ -76,14 +73,38 @@ export default function AlertClient({ data }: any) {
                 }
               }
             },
-            { column: "Título", row: "title" },
-            { column: "Mensagem", row: "message" },
             {
-              column: "Situação", row: { custom: (data) => <Badge value={data.status} /> }
+              column: "Título",
+              row: {
+                name: "title",
+                style: (data) => data.read
+                  ? { fontWeight: 400 }
+                  : { fontWeight: 600 }
+              },
             },
             {
+              column: "Mensagem",
+              row: {
+                name: "message",
+                style: (data) => data.read
+                  ? { fontWeight: 400 }
+                  : { fontWeight: 600 }
+              },
+            },
+            // {
+            //   column: "Situação", row: { custom: (data) => <Badge value={data.status} /> }
+            // },
+            {
               column: { style: { width: "2.3rem" } },
-              row: { actions: [{ icon: "fa-solid fa-file-lines", function: (data) => details(data), tooltip: "Detalhes" }] }
+              row: {
+                actions: [
+                  {
+                    icon: "fa-solid fa-file-lines",
+                    function: (data) => details(data),
+                    tooltip: "Detalhes"
+                  }
+                ]
+              }
             },
           ]}
         />

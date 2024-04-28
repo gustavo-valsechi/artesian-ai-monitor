@@ -5,8 +5,23 @@ import styled from "styled-components"
 export const Container = styled.header<{ themeType: string }>`
   padding: 1rem 2rem;
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+
+  .header-label {
+    padding: 1.5rem 0 1rem;
+    color: ${({ theme }) => theme.transparent_6};
+
+    span {
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+
+    p {
+        margin-top: .5rem;
+        margin-bottom: 2rem;
+        font-size: .8rem;
+    }
+  }
 
   .theme-toggle {
     width: 3rem;

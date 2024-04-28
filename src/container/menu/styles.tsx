@@ -78,6 +78,21 @@ export const Container: any = styled.aside<{ show: boolean }>`
 
                 .nav-item-content:first-child {
                     flex: .15;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transform: translateX(-0.6rem);
+
+                    .nav-item-content-img {
+                        width: 1.5rem;
+                        height: 1.5rem;
+
+                        img {
+                            object-fit: contain;
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
 
                     @media(max-width: 650px) {
                         flex: 1;
@@ -85,6 +100,7 @@ export const Container: any = styled.aside<{ show: boolean }>`
                         align-items: center;
                         justify-content: center;
                         margin-right: 5px;
+                        transform: translateX(0rem);
                     }
                 }
 
@@ -135,7 +151,7 @@ export const Container: any = styled.aside<{ show: boolean }>`
             color: ${({ theme }) => theme.transparent_6};
 
             @media(max-width: 650px) {
-                padding: .5rem;
+                padding: 1.5rem .5rem;
                 flex-direction: column;
                 justify-content: center;
                 background: transparent;

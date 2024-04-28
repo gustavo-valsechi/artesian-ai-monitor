@@ -1,13 +1,14 @@
-import { getMonitors } from "@/api/monitor"
+// import { getMotors } from "@/api/motor"
 
 import Client from "./client"
 
-export default async function MonitorServer() {
+export default async function MotorServer() {
 
-    const monitors = await getMonitors({
-        offset: 0,
-        order: { name: "ASC" }
-    }) || {}
+    const motors = []
+    // await getMotors({
+    //     offset: 0,
+    //     order: { name: "ASC" }
+    // }) || {}
 
-    return <Client data={monitors} />
+    return <Client data={motors} />
 }
