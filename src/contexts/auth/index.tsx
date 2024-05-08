@@ -6,7 +6,9 @@ import _ from "lodash"
 
 const AuthContext = createContext<any>({})
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+export const AuthProvider = ({ children }: {
+    children: React.ReactNode,
+}) => {
     const router = useRouter()
     const pathname = usePathname()
 

@@ -1,24 +1,50 @@
 "use client"
 
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Container } from "./styles"
-
-// import { getMonitors, removeMonitor } from "@/api/monitor"
+import { DCredentials, getAlerts, getMonitor, getMotors } from "@/api"
+import _ from "lodash"
 
 import Alert from "./alert"
 import Motors from "./motors"
 import Variable from "./variable"
 
-export default function MonitorClient({ data }: any) {
+export default function MonitorClient(props: any) {
+
+  const [data, setData] = useState(props.data)
+  const [fetcher, setFetcher] = useState(0)
+
+  useEffect(() => {
+    setTimeout(async () => {
+      const monitor = await getMonitor()
+
+      const concat = (oldData: any, newData: any) => {
+
+        if (oldData.content?.length === 10) oldData.content.shift()
+
+        return {
+          content: _.concat(oldData.content, newData.content),
+          total: oldData.total + newData.total,
+          totalPage: newData.totalPage,
+        }
+      }
+
+      setData({
+        ...data,
+        monitor: concat(data.monitor, monitor),
+      })
+
+      setFetcher(fetcher + 1)
+    }, 5000)
+  }, [fetcher])
+
   return (
     <Container>
-      <div className="monitor-content">
-        <Alert />
-        <Motors />
-        <Variable icon="fa-solid fa-wave-square" label="Frequência" />
-        <Variable icon="fa-solid fa-wave-square" label="Tensão" />
-        <Variable icon="fa-solid fa-wave-square" label="Corrente" />
-      </div>
+      <Alert data={data.alerts} />
+      <Motors data={data.motors} />
+      <Variable icon="fa-solid fa-wave-square" label="Frequência" name="frequency" data={data} />
+      <Variable icon="fa-solid fa-wave-square" label="Tensão" name="voltage" data={data} />
+      <Variable icon="fa-solid fa-wave-square" label="Corrente" name="current" data={data} />
     </Container>
   )
 }

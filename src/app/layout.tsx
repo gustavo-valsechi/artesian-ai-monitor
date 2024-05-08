@@ -2,11 +2,11 @@ import type { Metadata } from "next"
 import { ThemeProvider } from "@/contexts/theme"
 import { AuthProvider } from "@/contexts/auth"
 import { Toaster } from "react-hot-toast"
+import { TooltipProvider } from "@/contexts/tooltip"
 import GlobalStyles from "./global.styles"
 import StyledComponentsRegistry from "@/tools/registry"
 
 import Container from "../container"
-import { TooltipProvider } from "@/contexts/tooltip"
 
 export const metadata: Metadata = {
     title: "Artesian AI Monitor",

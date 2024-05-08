@@ -7,32 +7,31 @@ import Image from 'next/image'
 import _ from 'lodash'
 
 import motorIcon from "@/assets/motor.png"
-import motors from "../../motors/content.json"
 
-export default function Motors(props: any) {
+export default function Motors({ data }: any) {
     return (
         <Container>
-            {_.map(motors, (data, index) =>
+            {_.map(data.content, (motor: any, index) =>
                 <div key={index} className="content">
                     <div className="content-left">
-                        <Image src={motorIcon} alt={data.name} />
+                        <Image src={motorIcon} alt={motor.name} />
                     </div>
                     <div className="content-right">
                         <div className="content-header">
                             <div className="content-info">
-                                <span>{data.model}</span>
-                                <span>{data.name}</span>
+                                <span>{motor.model}</span>
+                                <span>{motor.name}</span>
                             </div>
                             <div
                                 className="content-status"
-                                data-status={data.status}
+                                data-status={motor.status}
                             >
-                                {_.lowerCase(data.status)}
+                                {_.lowerCase(motor.status)}
                             </div>
                         </div>
                         <div className="content-footer">
-                            <div className="content-properties">
-                                {_.map(Utils.format.property(data), (value: string, key: string) =>
+                            <div className="content-params">
+                                {_.map(Utils.format.params(motor), (value: string, key: string) =>
                                     <div key={key}>
                                         <span>
                                             {value}

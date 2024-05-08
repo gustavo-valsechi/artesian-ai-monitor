@@ -4,19 +4,17 @@ import React, { useState } from 'react'
 import { Container } from './styles'
 import _ from 'lodash'
 
-import alerts from "../../alerts/content.json"
+export default function Alert({ data }: any) {
 
-export default function Alert(props: any) {
-
-    const [content, setContent] = useState(alerts)
+    const [content, setContent] = useState(_.filter(data.content, ({ read }) => !read))
 
     return (
         <Container>
-            {_.map(content, (data, index) =>
+            {_.map(content, (alert: any, index) =>
                 <div key={index} className="alert-container">
-                    <span>{data.title}</span>
-                    <span>{data.message}</span>
-                    <div onClick={() => setContent(_.filter(content, ({ id }) => id !== data.id))}>
+                    <span>{alert.title}</span>
+                    <span>{alert.message}</span>
+                    <div onClick={() => setContent(_.filter(content, ({ id }: any) => id !== alert.id))}>
                         <i aria-hidden className='fa-solid fa-xmark' />
                     </div>
                 </div>

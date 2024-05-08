@@ -2,32 +2,24 @@
 
 import React, { useState } from "react"
 import { Container } from "./styles"
-import { Badge, Table } from "@/components"
+import { Table } from "@/components"
 
-import alerts from "./content.json"
-
-// import { getMonitors, removeMonitor } from "@/api/monitor"
+import { DCredentials, getAlerts } from "@/api"
 
 export default function AlertClient({ data }: any) {
 
   const [modal, setModal] = useState({ is: false, content: {} })
   const [page, setPage] = useState(0)
   const [loading, setLoading] = useState(false)
-  const [content, setContent] = useState({
-    content: alerts,
-    totalPage: 1
-  })
+  const [content, setContent] = useState<any>(data)
 
   const fetch = async (page: number) => {
     setPage(page || 0)
     setLoading(true)
 
-    // const data = await getMonitors({
-    //   offset: page,
-    //   order: { dhOperation: "DESC" }
-    // })
+    const data = await getAlerts({ ...DCredentials, offset: page })
 
-    // setContent(data)
+    setContent(data)
     setLoading(false)
   }
 
@@ -40,75 +32,73 @@ export default function AlertClient({ data }: any) {
 
   return (
     <Container>
-      <div className="monitor-content">
-        <Table
-          loading={loading}
-          content={content?.content}
-          paginate={{
-            total: content?.totalPage,
-            page: {
-              value: page,
-              set: fetch
+      <Table
+        loading={loading}
+        content={content?.content}
+        paginate={{
+          total: content?.totalPage,
+          page: {
+            value: page,
+            set: fetch
+          }
+        }}
+        notFound={{
+          title: "Nenhum alerta encontrado",
+          message: "Nenhuma ocorrência encontrada pelo monitoramento"
+        }}
+        options={[
+          {
+            column: {
+              action: {
+                icon: `fa-solid fa-arrows-rotate ${loading ? "fa-spin" : ""}`,
+                disabled: loading,
+                function: () => fetch(0),
+                position: "left"
+              }
+            },
+            row: {
+              image: {
+                icon: (data: any) => data.read
+                  ? "fa-regular fa-bell"
+                  : "fa-solid fa-bell"
+              }
             }
-          }}
-          notFound={{
-            title: "Nenhum cliente encontrado",
-            message: "Adicione um cliente para aparecer algum registro"
-          }}
-          options={[
-            {
-              column: {
-                action: {
-                  icon: `fa-solid fa-arrows-rotate ${loading ? "fa-spin" : ""}`,
-                  disabled: loading,
-                  function: () => fetch(0),
-                  position: "left"
+          },
+          {
+            column: "Título",
+            row: {
+              name: "title",
+              style: (data) => data.read
+                ? { fontWeight: 400 }
+                : { fontWeight: 600 }
+            },
+          },
+          {
+            column: "Mensagem",
+            row: {
+              name: "message",
+              style: (data) => data.read
+                ? { fontWeight: 400 }
+                : { fontWeight: 600 }
+            },
+          },
+          // {
+          //   column: "Situação", row: { custom: (data) => <Badge value={data.status} /> }
+          // },
+          {
+            column: { style: { width: "2.3rem" } },
+            row: {
+              actions: [
+                {
+                  icon: "fa-solid fa-file-lines",
+                  function: (data) => details(data),
+                  tooltip: "Detalhes"
                 }
-              },
-              row: {
-                image: {
-                  icon: (data: any) => data.read
-                    ? "fa-regular fa-bell"
-                    : "fa-solid fa-bell"
-                }
-              }
-            },
-            {
-              column: "Título",
-              row: {
-                name: "title",
-                style: (data) => data.read
-                  ? { fontWeight: 400 }
-                  : { fontWeight: 600 }
-              },
-            },
-            {
-              column: "Mensagem",
-              row: {
-                name: "message",
-                style: (data) => data.read
-                  ? { fontWeight: 400 }
-                  : { fontWeight: 600 }
-              },
-            },
-            // {
-            //   column: "Situação", row: { custom: (data) => <Badge value={data.status} /> }
-            // },
-            {
-              column: { style: { width: "2.3rem" } },
-              row: {
-                actions: [
-                  {
-                    icon: "fa-solid fa-file-lines",
-                    function: (data) => details(data),
-                    tooltip: "Detalhes"
-                  }
-                ]
-              }
-            },
-          ]}
-        />
-      </div>
+              ]
+            }
+          },
+        ]}
+      />
     </Container>
   )
 }

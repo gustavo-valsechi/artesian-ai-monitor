@@ -108,7 +108,7 @@ export const Container = styled.div`
                 justify-content: space-between;
                 gap: 1rem;
 
-                .content-properties {
+                .content-params {
                     display: flex;
                     align-items: center;
                     justify-content: start;

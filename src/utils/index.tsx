@@ -44,10 +44,10 @@ export default class Utils {
             return new Intl.NumberFormat(locale, { minimumFractionDigits: 2 }).format(value)
         },
 
-        property: (data: { [key: string]: any }) => {
+        params: (data: { [key: string]: any }) => {
             if (!_.isObject(data) || _.isArray(data)) return data
 
-            const properties: any = {}
+            const params: any = {}
 
             const sufix = {
                 frequency: "hz",
@@ -63,10 +63,10 @@ export default class Utils {
 
                 if (_.isNaN(value)) continue
 
-                properties[key] = (data[key] ?? "---") + sufix[key]
+                params[key] = (data[key] ?? "---") + sufix[key]
             }
 
-            return properties
+            return params
         },
 
     }

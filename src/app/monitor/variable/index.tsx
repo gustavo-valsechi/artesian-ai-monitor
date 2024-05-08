@@ -15,15 +15,8 @@ export default function Chart(props: any) {
 
     const [toggle, setToggle] = useState(false)
 
-    const content = props.data?.content || [
-        { timestamp: "04/04/2024 15:40", engineOne: _.random(true), engineTwo: _.random(true), engineThree: _.random(true) },
-        { timestamp: "04/04/2024 15:45", engineOne: _.random(true), engineTwo: _.random(true), engineThree: _.random(true) },
-        { timestamp: "04/04/2024 15:50", engineOne: _.random(true), engineTwo: _.random(true), engineThree: _.random(true) },
-        { timestamp: "04/04/2024 15:55", engineOne: _.random(true), engineTwo: _.random(true), engineThree: _.random(true) },
-        { timestamp: "04/04/2024 16:00", engineOne: _.random(true), engineTwo: _.random(true), engineThree: _.random(true) },
-        { timestamp: "04/04/2024 16:05", engineOne: _.random(true), engineTwo: _.random(true), engineThree: _.random(true) },
-        { timestamp: "04/04/2024 16:10", engineOne: _.random(true), engineTwo: _.random(true), engineThree: _.random(true) },
-    ]
+    const motors = props.data?.motors?.content || []
+    const monitor = props.data?.monitor?.content || []
 
     const options: ApexOptions = {
         colors: ['#42d4de', '#877cf2', '#fa8373'],
@@ -32,24 +25,14 @@ export default function Chart(props: any) {
         fill: { gradient: { opacityFrom: 0.9, opacityTo: 0.8 } },
         legend: { show: false },
         chart: { toolbar: { show: false } },
-        xaxis: { categories: _.map(content, (data) => data.timestamp), labels: { style: { colors: _.map(content, () => themeContent.transparent_6) } } },
-        yaxis: { labels: { style: { colors: _.map(content, () => themeContent.transparent_6) } } },
+        xaxis: { categories: _.map(monitor, (data) => data.timestamp), labels: { style: { colors: _.map(monitor, () => themeContent.transparent_6) } } },
+        yaxis: { labels: { style: { colors: _.map(monitor, () => themeContent.transparent_6) } } },
     }
 
-    const series = [
-        {
-            name: "Motor 1",
-            data: _.map(content, (data) => _.round(data.engineOne, 4)),
-        },
-        {
-            name: "Motor 2",
-            data: _.map(content, (data) => _.round(data.engineTwo, 4)),
-        },
-        {
-            name: "Motor 3",
-            data: _.map(content, (data) => _.round(data.engineThree, 4)),
-        },
-    ]
+    const series = _.map(motors, (motor) => ({
+        name: motor.name,
+        data: _.map(monitor, (data) => data?.[motor.id]?.[props.name] || 0),
+    }))
 
     return (
         <Container toggle={toggle}>

@@ -1,34 +1,47 @@
 import { api } from "../"
 import { toast } from "react-hot-toast"
-import moment from "moment"
 import _ from "lodash"
 
-export async function getMonitor(credentials?: any) {
+export async function getMotors(credentials: any) {
     try {
         // const { data } = await api.get("monitor")
 
         // console.log(data)
 
         return {
-            content: [{
-                "timestamp": moment().format("DD/MM HH:mm:ss"),
-                "1": {
-                    frequency: _.random(58, 62),
-                    voltage: _.random(218, 232),
-                    current: _.random(14, 17)
+            content: [
+                {
+                    "id": "1",
+                    "name": "Motor 1",
+                    "model": "MotorX-5000",
+                    "power": 3300,
+                    "voltage": 220,
+                    "current": 15,
+                    "frequency": 60,
+                    "status": "DESATIVADO"
                 },
-                "2": {
-                    frequency: _.random(58, 62),
-                    voltage: _.random(218, 232),
-                    current: _.random(14, 17)
+                {
+                    "id": "2",
+                    "name": "Motor 2",
+                    "model": "MotorY-7000",
+                    "power": 3300,
+                    "voltage": 220,
+                    "current": 15,
+                    "frequency": 60,
+                    "status": "ATIVO"
                 },
-                "3": {
-                    frequency: _.random(58, 62),
-                    voltage: _.random(218, 232),
-                    current: _.random(14, 17)
+                {
+                    "id": "3",
+                    "name": "Motor 3",
+                    "model": "MotorZ-10000",
+                    "power": 3300,
+                    "voltage": 220,
+                    "current": 15,
+                    "frequency": 60,
+                    "status": "DESATIVADO"
                 }
-            }],
-            total: 10,
+            ],
+            total: 3,
             totalPages: 1,
         }
     } catch (error: any) {
@@ -36,7 +49,7 @@ export async function getMonitor(credentials?: any) {
     }
 }
 
-export async function saveMonitor(body: any) {
+export async function saveMotor(body: any) {
     try {
 
         // const req: any = {
@@ -58,7 +71,7 @@ export async function saveMonitor(body: any) {
     }
 }
 
-export async function removeMonitor(uuid: string) {
+export async function removeMotor(uuid: string) {
     try {
         // const { data } = await api.delete(`monitor/${uuid}`)
 
