@@ -2,10 +2,11 @@
 
 import React, { useEffect, useState } from "react"
 import { Container } from "./styles"
-import { DCredentials, getAlerts, getMonitor, getMotors } from "@/api"
+import { getMonitor } from "@/api"
 import _ from "lodash"
 
 import Alert from "./alert"
+import Flow from "./flow"
 import Motors from "./motors"
 import Variable from "./variable"
 
@@ -35,12 +36,13 @@ export default function MonitorClient(props: any) {
       })
 
       setFetcher(fetcher + 1)
-    }, 5000)
+    }, 1000)
   }, [fetcher])
 
   return (
     <Container>
       <Alert data={data.alerts} />
+      <Flow data={data} />
       <Motors data={data.motors} />
       <Variable icon="fa-solid fa-wave-square" label="Frequência" name="frequency" data={data} />
       <Variable icon="fa-solid fa-wave-square" label="Tensão" name="voltage" data={data} />

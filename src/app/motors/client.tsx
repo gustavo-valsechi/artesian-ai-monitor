@@ -6,11 +6,16 @@ import { Table } from "@/components"
 import Utils from "@/utils"
 import _ from "lodash"
 
-import { DCredentials, getMotors, removeMotor } from "@/api"
+import { DCredentials, getMotors } from "@/api"
+
+import ModalSave from "./modals/save"
+import ModalRemove from "./modals/remove"
 
 export default function MotorClient({ data }: any) {
 
-  const [modal, setModal] = useState({ is: false, content: {} })
+  const [modalSave, setModalSave] = useState({ is: false, content: {} })
+  const [modalRemove, setModalRemove] = useState({ is: false, content: {} })
+
   const [page, setPage] = useState(0)
   const [loading, setLoading] = useState(false)
   const [content, setContent] = useState(data)
@@ -25,15 +30,20 @@ export default function MotorClient({ data }: any) {
     setLoading(false)
   }
 
-  const details = (data: any) => {
-    setModal({
-      is: true,
-      content: data
-    })
-  }
-
   return (
     <Container>
+      <ModalSave
+        modal={{
+          value: modalSave,
+          set: setModalSave
+        }}
+      />
+      <ModalRemove
+        modal={{
+          value: modalRemove,
+          set: setModalRemove
+        }}
+      />
       <Table
         loading={loading}
         content={content?.content}
@@ -93,7 +103,7 @@ export default function MotorClient({ data }: any) {
               action: {
                 icon: "fa-solid fa-plus",
                 disabled: loading,
-                function: () => { },
+                function: () => setModalSave({ is: true, content: {} }),
                 position: "right"
               }
             },
@@ -101,12 +111,12 @@ export default function MotorClient({ data }: any) {
               actions: [
                 {
                   icon: "fa-solid fa-pen-to-square",
-                  function: (data) => details(data),
+                  function: (data) => setModalSave({ is: true, content: data }),
                   tooltip: "Editar"
                 },
                 {
                   icon: "fa-solid fa-trash-can",
-                  function: (data) => details(data),
+                  function: (data) => setModalRemove({ is: true, content: data }),
                   tooltip: "Remover"
                 }
               ]

@@ -12,6 +12,7 @@ export async function getMonitor(credentials?: any) {
         return {
             content: [{
                 "timestamp": moment().format("DD/MM HH:mm:ss"),
+                "flow": _.random(21, 24),
                 "1": {
                     frequency: _.random(58, 62),
                     voltage: _.random(218, 232),

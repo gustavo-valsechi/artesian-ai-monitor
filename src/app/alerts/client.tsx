@@ -82,9 +82,10 @@ export default function AlertClient({ data }: any) {
                 : { fontWeight: 600 }
             },
           },
-          // {
-          //   column: "Situação", row: { custom: (data) => <Badge value={data.status} /> }
-          // },
+          {
+            column: "Data",
+            row: "timestamp"
+          },
           {
             column: { style: { width: "2.3rem" } },
             row: {
