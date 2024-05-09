@@ -51,7 +51,7 @@ export default class Utils {
 
             const sufix = {
                 frequency: "hz",
-                power: "W",
+                power: "kW",
                 voltage: "V",
                 current: "A",
             }

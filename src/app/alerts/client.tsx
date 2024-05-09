@@ -6,9 +6,11 @@ import { Table } from "@/components"
 
 import { DCredentials, getAlerts } from "@/api"
 
+import ModalDetails from "./modals/details"
+
 export default function AlertClient({ data }: any) {
 
-  const [modal, setModal] = useState({ is: false, content: {} })
+  const [modalDetails, setModalDetails] = useState({ is: false, content: {} })
   const [page, setPage] = useState(0)
   const [loading, setLoading] = useState(false)
   const [content, setContent] = useState<any>(data)
@@ -23,15 +25,14 @@ export default function AlertClient({ data }: any) {
     setLoading(false)
   }
 
-  const details = (data: any) => {
-    setModal({
-      is: true,
-      content: data
-    })
-  }
-
   return (
     <Container>
+      <ModalDetails
+        modal={{
+          value: modalDetails,
+          set: setModalDetails
+        }}
+      />
       <Table
         loading={loading}
         content={content?.content}
@@ -92,7 +93,7 @@ export default function AlertClient({ data }: any) {
               actions: [
                 {
                   icon: "fa-solid fa-file-lines",
-                  function: (data) => details(data),
+                  function: (data) => setModalDetails({ is: true, content: data }),
                   tooltip: "Detalhes"
                 }
               ]

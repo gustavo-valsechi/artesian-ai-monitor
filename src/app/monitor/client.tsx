@@ -42,8 +42,8 @@ export default function MonitorClient(props: any) {
   return (
     <Container>
       <Alert data={data.alerts} />
-      <Flow data={data} />
       <Motors data={data.motors} />
+      <Flow data={data} />
       <Variable icon="fa-solid fa-wave-square" label="Frequência" name="frequency" data={data} />
       <Variable icon="fa-solid fa-wave-square" label="Tensão" name="voltage" data={data} />
       <Variable icon="fa-solid fa-wave-square" label="Corrente" name="current" data={data} />

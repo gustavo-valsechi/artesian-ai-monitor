@@ -1,4 +1,4 @@
-import { api } from "../../services"
+import { api } from "../"
 import { toast } from "react-hot-toast"
 import _ from "lodash"
 

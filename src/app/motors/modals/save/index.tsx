@@ -20,7 +20,11 @@ export default function ModalSave(props: any) {
 
         await saveMotor({ ...data, "id": content.id })
 
+        await props.fetch(0)
+
         setSaving(false)
+
+        close()
     }
 
     return (
@@ -37,6 +41,7 @@ export default function ModalSave(props: any) {
                 <Form
                     onSubmit={onSubmit}
                     initialValues={{
+                        "id": content.id || "",
                         "name": content.name || "",
                         "model": content.model || "",
                         "power": String(content.power || ""),

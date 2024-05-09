@@ -33,12 +33,14 @@ export default function MotorClient({ data }: any) {
   return (
     <Container>
       <ModalSave
+        fetch={fetch}
         modal={{
           value: modalSave,
           set: setModalSave
         }}
       />
       <ModalRemove
+        fetch={fetch}
         modal={{
           value: modalRemove,
           set: setModalRemove

@@ -18,7 +18,11 @@ export default function ModalRemove(props: any) {
 
         await removeMotor(content.id)
 
+        await props.fetch(0)
+
         setRemoving(false)
+
+        close()
     }
 
     return (
