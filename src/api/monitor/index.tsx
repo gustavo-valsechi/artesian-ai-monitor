@@ -3,9 +3,21 @@ import { toast } from "react-hot-toast"
 import moment from "moment"
 import _ from "lodash"
 
+export async function getFlowMonitor(credentials?: any) {
+    try {
+        const { data } = await api.get("previsao")
+
+        return {
+            content: _.reverse(data?.content || [])
+        }
+    } catch (error: any) {
+        console.error(error)
+    }
+}
+
 export async function getMonitor(credentials?: any) {
     try {
-        // const { data } = await api.get("monitor")
+        // const { data } = await api.get("previsao")
 
         // console.log(data)
 

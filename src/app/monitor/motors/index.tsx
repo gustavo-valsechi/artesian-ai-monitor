@@ -14,7 +14,7 @@ export default function Motors({ data }: any) {
             {_.map(data.content, (motor: any, index) =>
                 <div key={index} className="content">
                     <div className="content-left">
-                        <Image src={motorIcon} alt={motor.name} />
+                        <Image priority src={motorIcon} alt={motor.name} />
                     </div>
                     <div className="content-right">
                         <div className="content-header">

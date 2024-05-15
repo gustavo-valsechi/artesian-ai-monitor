@@ -10,7 +10,7 @@ import _ from 'lodash'
 
 const ApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
-export default function ChartFlow(props: any) {
+export default function ChartFaultDetection(props: any) {
 
     const { content: themeContent } = useTheme()
 
@@ -19,15 +19,15 @@ export default function ChartFlow(props: any) {
     const monitor = props.data?.content || []
 
     const options: ApexOptions = {
-        colors: [themeContent.secondary],
+        colors: [themeContent.negative],
         dataLabels: { enabled: false },
         stroke: { curve: 'smooth', width: 2, },
         fill: { gradient: { opacityFrom: 0.9, opacityTo: 0.8 } },
         legend: { show: false },
         chart: { toolbar: { show: false } },
         yaxis: {
-            min: 23,
-            max: 26,
+            min: 0,
+            max: 1,
             labels: { style: { colors: _.map(monitor, () => themeContent.transparent_6) } }
         },
         xaxis: {
@@ -37,8 +37,8 @@ export default function ChartFlow(props: any) {
     }
 
     const series = [{
-        name: "Vazão",
-        data: _.map(monitor, (data) => _.round(data?.previsaoregistrada || 0, 3)),
+        name: "Falha",
+        data: _.map(monitor, (data) => 0),
     }]
 
     return (
@@ -48,8 +48,8 @@ export default function ChartFlow(props: any) {
                 onClick={() => setToggle(!toggle)}
             >
                 <div className="chart-header-label">
-                    <i aria-hidden className="fa-solid fa-code-commit" />
-                    <span>Vazão</span>
+                    <i aria-hidden className="fa-solid fa-circle-exclamation" />
+                    <span>Detecção de falhas</span>
                 </div>
             </div>
             <div className="chart-body">
@@ -57,7 +57,7 @@ export default function ChartFlow(props: any) {
                     options={options}
                     series={series}
                     type="area"
-                    height={200}
+                    height={120}
                     width="100%"
                 />
             </div>

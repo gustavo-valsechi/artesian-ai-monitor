@@ -66,15 +66,6 @@ export default function AlertClient({ data }: any) {
             }
           },
           {
-            column: "Título",
-            row: {
-              name: "title",
-              style: (data) => data.read
-                ? { fontWeight: 400 }
-                : { fontWeight: 600 }
-            },
-          },
-          {
             column: "Mensagem",
             row: {
               name: "message",

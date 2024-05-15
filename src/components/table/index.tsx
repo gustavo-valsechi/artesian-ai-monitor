@@ -184,6 +184,7 @@ export function Table(props: ITable) {
                                   ? (option.row as { image: (data: any) => React.ReactNode })?.image(data)
                                   : false
                                     ? <Image
+                                      priority
                                       src={!!(option.row as IRow)?.image?.value
                                         ? (option.row as IRow)?.image?.value(data)
                                         : (option.row as IRow)?.image(data)}

@@ -2,10 +2,10 @@
 
 import React, { useEffect, useState } from "react"
 import { Container } from "./styles"
-import { getMonitor } from "@/api"
+import { getFlowMonitor, getMonitor } from "@/api"
 import _ from "lodash"
 
-import Alert from "./alert"
+import FaultDetection from "./fault-detection"
 import Flow from "./flow"
 import Motors from "./motors"
 import Variable from "./variable"
@@ -17,33 +17,32 @@ export default function MonitorClient(props: any) {
 
   useEffect(() => {
     setTimeout(async () => {
+      const flow = await getFlowMonitor()
       const monitor = await getMonitor()
 
       const concat = (oldData: any, newData: any) => {
-
-        if (oldData.content?.length === 10) oldData.content.shift()
-
         return {
-          content: _.concat(oldData.content, newData.content),
-          total: oldData.total + newData.total,
-          totalPage: newData.totalPage,
+          content: _.takeRight(_.concat(oldData.content, newData.content), 10),
+          total: (oldData.total || 0) + (newData.total || 0),
+          totalPage: (newData.totalPage || 1),
         }
       }
 
       setData({
         ...data,
+        flow: concat(data.flow, flow),
         monitor: concat(data.monitor, monitor),
       })
 
       setFetcher(fetcher + 1)
-    }, 1000)
+    }, 5000)
   }, [fetcher])
 
   return (
     <Container>
-      <Alert data={data.alerts} />
       <Motors data={data.motors} />
-      <Flow data={data} />
+      <FaultDetection data={data.flow} />
+      <Flow data={data.flow} />
       <Variable icon="fa-solid fa-wave-square" label="Frequência" name="frequency" data={data} />
       <Variable icon="fa-solid fa-wave-square" label="Tensão" name="voltage" data={data} />
       <Variable icon="fa-solid fa-wave-square" label="Corrente" name="current" data={data} />

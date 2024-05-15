@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const api = axios.create({
-    baseURL: "https://i4-0-artesian-ai-monitor.onrender.com"
+    baseURL: "http://localhost:5000" || "https://i4-0-artesian-ai-monitor.onrender.com",
 })
 
 export * from "./alerts"

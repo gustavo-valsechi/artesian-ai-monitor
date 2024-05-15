@@ -40,7 +40,7 @@ export default function Menu(props: IProps) {
                                                 <i aria-hidden className={data.icon} />}
                                             {!!data.img &&
                                                 <div className="nav-item-content-img">
-                                                    <Image alt="" src={data.img} />
+                                                    <Image priority alt="" src={data.img} />
                                                 </div>}
                                         </div>
                                         <div className="nav-item-content">
