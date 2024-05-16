@@ -16,7 +16,7 @@ export default function Chart(props: any) {
     const [toggle, setToggle] = useState(false)
 
     const motors = props.data?.motors?.content || []
-    const monitor = props.data?.monitor?.content || []
+    const monitor = props.data?.variables?.content || []
 
     const options: ApexOptions = {
         colors: ['#42d4de', '#877cf2', '#fa8373'],
@@ -26,7 +26,11 @@ export default function Chart(props: any) {
         legend: { show: false },
         chart: { toolbar: { show: false } },
         xaxis: { categories: _.map(monitor, (data) => data.timestamp), labels: { style: { colors: _.map(monitor, () => themeContent.transparent_6) } } },
-        yaxis: { labels: { style: { colors: _.map(monitor, () => themeContent.transparent_6) } } },
+        yaxis: {
+            min: props.min,
+            max: props.max,
+            labels: { style: { colors: _.map(monitor, () => themeContent.transparent_6) } }
+        },
     }
 
     const series = _.map(motors, (motor) => ({

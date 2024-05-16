@@ -38,7 +38,7 @@ export default function ChartFaultDetection(props: any) {
 
     const series = [{
         name: "Falha",
-        data: _.map(monitor, (data) => 0),
+        data: _.map(monitor, (data) => _.round(data?.previsao_registrada || 0, 3)),
     }]
 
     return (

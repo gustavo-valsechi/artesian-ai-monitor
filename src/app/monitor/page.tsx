@@ -1,4 +1,4 @@
-import { getMotors, getMonitor, DCredentials, getFlowMonitor } from "@/api"
+import { getMotors, DCredentials, getFlowMonitor, getFaultDetectionMonitor, getVariablesMonitor } from "@/api"
 
 import Client from "./client"
 
@@ -6,7 +6,8 @@ export default async function MonitorServer() {
 
     const motors = await getMotors(DCredentials)
     const flow = await getFlowMonitor()
-    const monitor = await getMonitor()
+    const faultDetection = await getFaultDetectionMonitor()
+    const variables = await getVariablesMonitor()
 
-    return <Client data={{ motors, flow, monitor }} />
+    return <Client data={{ motors, flow, faultDetection, variables }} />
 }

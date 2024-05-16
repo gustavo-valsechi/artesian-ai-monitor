@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import { Container } from "./styles"
-import { getFlowMonitor, getMonitor } from "@/api"
+import { getFaultDetectionMonitor, getFlowMonitor, getVariablesMonitor } from "@/api"
 import _ from "lodash"
 
 import FaultDetection from "./fault-detection"
@@ -18,7 +18,8 @@ export default function MonitorClient(props: any) {
   useEffect(() => {
     setTimeout(async () => {
       const flow = await getFlowMonitor()
-      const monitor = await getMonitor()
+      const faultDetection = await getFaultDetectionMonitor()
+      const variables = await getVariablesMonitor()
 
       const concat = (oldData: any, newData: any) => {
         return {
@@ -31,7 +32,8 @@ export default function MonitorClient(props: any) {
       setData({
         ...data,
         flow: concat(data.flow, flow),
-        monitor: concat(data.monitor, monitor),
+        faultDetection: concat(data.faultDetection, faultDetection),
+        variables: concat(data.variables, variables),
       })
 
       setFetcher(fetcher + 1)
@@ -41,11 +43,31 @@ export default function MonitorClient(props: any) {
   return (
     <Container>
       <Motors data={data.motors} />
-      <FaultDetection data={data.flow} />
+      <FaultDetection data={data.faultDetection} />
       <Flow data={data.flow} />
-      <Variable icon="fa-solid fa-wave-square" label="Frequência" name="frequency" data={data} />
-      <Variable icon="fa-solid fa-wave-square" label="Tensão" name="voltage" data={data} />
-      <Variable icon="fa-solid fa-wave-square" label="Corrente" name="current" data={data} />
+      <Variable
+        icon="fa-solid fa-wave-square"
+        label="Frequência"
+        name="frequencia" data={data}
+        min={50}
+        max={70}
+      />
+      <Variable
+        icon="fa-solid fa-wave-square"
+        label="Tensão"
+        name="tensao_entrada"
+        data={data}
+        min={300}
+        max={500}
+      />
+      <Variable
+        icon="fa-solid fa-wave-square"
+        label="Corrente"
+        name="corrente"
+        data={data}
+        min={10}
+        max={30}
+      />
     </Container>
   )
 }

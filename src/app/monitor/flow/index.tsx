@@ -26,7 +26,7 @@ export default function ChartFlow(props: any) {
         legend: { show: false },
         chart: { toolbar: { show: false } },
         yaxis: {
-            min: 23,
+            min: 15,
             max: 26,
             labels: { style: { colors: _.map(monitor, () => themeContent.transparent_6) } }
         },
@@ -38,7 +38,7 @@ export default function ChartFlow(props: any) {
 
     const series = [{
         name: "Vazão",
-        data: _.map(monitor, (data) => _.round(data?.previsaoregistrada || 0, 3)),
+        data: _.map(monitor, (data) => _.round(data?.vazao_registrada || 0, 3)),
     }]
 
     return (
