@@ -2,8 +2,7 @@
 
 import React, { useState } from 'react'
 import { Container } from './styles'
-import { ApexOptions } from 'apexcharts'
-import { useTheme } from '@/contexts/theme'
+import { Chart } from '@/components'
 import dynamic from 'next/dynamic'
 import moment from 'moment'
 import _ from 'lodash'
@@ -12,37 +11,12 @@ const ApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
 
 export default function ChartFaultDetection(props: any) {
 
-    const { content: themeContent } = useTheme()
-
     const [toggle, setToggle] = useState(false)
 
     const monitor = props.data?.content || []
 
-    const options: ApexOptions = {
-        colors: [themeContent.negative],
-        dataLabels: { enabled: false },
-        stroke: { curve: 'smooth', width: 2, },
-        fill: { gradient: { opacityFrom: 0.9, opacityTo: 0.8 } },
-        legend: { show: false },
-        chart: { toolbar: { show: false } },
-        yaxis: {
-            min: 0,
-            max: 1,
-            labels: { style: { colors: _.map(monitor, () => themeContent.transparent_6) } }
-        },
-        xaxis: {
-            categories: _.map(monitor, (data) => moment(data.timestamp).format("DD/MM HH:mm:ss")),
-            labels: { style: { colors: _.map(monitor, () => themeContent.transparent_6) } }
-        },
-    }
-
-    const series = [{
-        name: "Falha",
-        data: _.map(monitor, (data) => _.round(data?.previsao_registrada || 0, 3)),
-    }]
-
     return (
-        <Container toggle={toggle}>
+        <Container hasFault={_.some(monitor, (data) => !!data.previsao_registrada)}>
             <div
                 className="chart-header"
                 onClick={() => setToggle(!toggle)}
@@ -53,12 +27,14 @@ export default function ChartFaultDetection(props: any) {
                 </div>
             </div>
             <div className="chart-body">
-                <ApexChart
-                    options={options}
-                    series={series}
-                    type="area"
+                <Chart
+                    content={monitor}
+                    xAxis={(data) => moment(data.timestamp).format("DD/MM HH:mm:ss")}
+                    yAxis={{ "Falha": (data) => _.round(data?.previsao_registrada || 0, 3) }}
+                    colors={["negative"]}
                     height={120}
-                    width="100%"
+                    min={0}
+                    max={1}
                 />
             </div>
         </Container>

@@ -9,24 +9,36 @@ import _ from 'lodash'
 import motorIcon from "@/assets/motor.png"
 
 export default function Motors({ data }: any) {
+
+    const motors = data?.motors?.content || []
+    const monitor = data?.variables?.content || []
+
+    const status = (motor: any) => {
+        const motorLog = _.filter(monitor, (data) => data.id_motor === motor.id_motor)
+
+        const timeline = _.map(motorLog, (data) => Number(data.status || 0))
+
+        return !!_.reverse(timeline)[0] ? "ATIVO" : "DESATIVADO"
+    }
+
     return (
         <Container>
-            {_.map(data.content, (motor: any, index) =>
+            {_.map(motors, (motor: any, index) =>
                 <div key={index} className="content">
                     <div className="content-left">
-                        <Image priority src={motorIcon} alt={motor.name} />
+                        <Image priority src={motorIcon} alt={motor.tag} />
                     </div>
                     <div className="content-right">
                         <div className="content-header">
                             <div className="content-info">
-                                <span>{motor.model}</span>
-                                <span>{motor.name}</span>
+                                <span>{motor.tag}</span>
+                                <span>{motor.descricao}</span>
                             </div>
                             <div
                                 className="content-status"
-                                data-status={motor.status}
+                                data-status={status(motor)}
                             >
-                                {_.lowerCase(motor.status)}
+                                {_.lowerCase(status(motor))}
                             </div>
                         </div>
                         <div className="content-footer">

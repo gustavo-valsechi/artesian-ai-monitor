@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Container = styled.div<{ toggle: boolean }>`
+export const Container = styled.div`
     background-color: ${({ theme }) => theme.transparent_05};
     border-radius: 5px;
 

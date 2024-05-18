@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
-export const Container = styled.div<{ toggle: boolean }>`
+export const Container = styled.div<{ hasFault: boolean }>`
+    border: 1px solid ${({ theme, hasFault }) => hasFault ? theme.negative : "transparent"};
     background-color: ${({ theme }) => theme.transparent_05};
     border-radius: 5px;
 
@@ -8,7 +9,7 @@ export const Container = styled.div<{ toggle: boolean }>`
         display: flex;
         align-items: center;
         padding: 1rem 1.3rem;
-        color: ${({ theme }) => theme.transparent_6};
+        color: ${({ theme, hasFault }) => hasFault ? theme.negative : theme.transparent_6};
         border-bottom: 1px solid ${(props) => props.theme.transparent_05};
         cursor: pointer;
 

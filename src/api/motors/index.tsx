@@ -6,15 +6,9 @@ import motors from "../../repository/motors.json"
 
 export async function getMotors(credentials: any) {
     try {
-        // const { data } = await api.get("monitor")
+        const { data } = await api.get("motor")
 
-        // console.log(data)
-
-        return {
-            content: motors,
-            total: motors.length,
-            totalPages: Math.ceil(motors.length / credentials.limit),
-        }
+        return data
     } catch (error: any) {
         console.error(error)
     }
@@ -32,7 +26,7 @@ export async function saveMotor(body: any) {
         // const url = req[String(!!body.id)].url
 
         // const { data } = await (api as any)[method](url, _.omit(body, ["id"]))
-        
+
         const index = _.findIndex(motors, (data) => data.id === body.id)
 
         if (method === "post") motors.unshift(body)

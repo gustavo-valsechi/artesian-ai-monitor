@@ -42,7 +42,7 @@ export default function MonitorClient(props: any) {
 
   return (
     <Container>
-      <Motors data={data.motors} />
+      <Motors data={data} />
       <FaultDetection data={data.faultDetection} />
       <Flow data={data.flow} />
       <Variable

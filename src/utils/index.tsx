@@ -50,10 +50,10 @@ export default class Utils {
             const params: any = {}
 
             const sufix = {
-                frequency: "hz",
-                power: "kW",
-                voltage: "V",
-                current: "A",
+                frequencia: "hz",
+                potencia: "kW",
+                tensao: "V",
+                corrente: "A",
             }
 
             for (const key in data) {

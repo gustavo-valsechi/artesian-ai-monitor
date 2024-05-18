@@ -77,12 +77,12 @@ export default function MotorClient({ data }: any) {
             }
           },
           {
-            column: "Nome",
-            row: { name: "name", style: { fontWeight: 600 } }
+            column: "Tag",
+            row: { name: "tag", style: { fontWeight: 600 } }
           },
           {
-            column: "Modelo",
-            row: "model"
+            column: "Descrição",
+            row: "descricao"
           },
           {
             column: "Parâmetros",
