@@ -42,7 +42,7 @@ const TooltipProviderContainer = ({ children }: { children: React.ReactNode }) =
                 setTooltips(_.filter(tooltips, (data) => JSON.stringify(data) === JSON.stringify(getContent(target))))
             })
         })
-    }, [pathname])
+    }, [pathname, tooltips])
 
     return (
         <TooltipContext.Provider

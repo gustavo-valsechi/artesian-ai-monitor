@@ -38,6 +38,7 @@ export default function MonitorClient(props: any) {
 
       setFetcher(fetcher + 1)
     }, 5000)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetcher])
 
   return (

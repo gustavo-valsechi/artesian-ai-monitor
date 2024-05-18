@@ -17,6 +17,7 @@ export default function ChartVariables(props: any) {
 
     useEffect(() => {
         getColors()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const getColors = () => {
