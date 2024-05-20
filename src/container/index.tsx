@@ -44,7 +44,6 @@ export default function MainContainer({ children }: { children: React.ReactNode 
             icon: "fa-solid fa-bell",
             label: "Alertas",
             route: "/alerts",
-            amount: 2
         },
     ]
 

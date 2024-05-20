@@ -3,8 +3,9 @@
 import React, { useState } from "react"
 import { Container } from "./styles"
 import { Table } from "@/components"
+import moment from "moment"
 
-import { DCredentials, getAlerts } from "@/api"
+import { DCredentials, getFaultDetections } from "@/api"
 
 import ModalDetails from "./modals/details"
 
@@ -19,7 +20,11 @@ export default function AlertClient({ data }: any) {
     setPage(page || 0)
     setLoading(true)
 
-    const data = await getAlerts({ ...DCredentials, offset: page })
+    const data = await getFaultDetections({
+      ...DCredentials,
+      filters: { previsao_registrada: 1 },
+      offset: page
+    })
 
     setContent(data)
     setLoading(false)
@@ -76,20 +81,20 @@ export default function AlertClient({ data }: any) {
           },
           {
             column: "Data",
-            row: "timestamp"
+            row: { custom: (data) => moment(data.timestamp).format("DD/MM/YYYY HH:mm:ss") }
           },
-          {
-            column: { style: { width: "2.3rem" } },
-            row: {
-              actions: [
-                {
-                  icon: "fa-solid fa-file-lines",
-                  function: (data) => setModalDetails({ is: true, content: data }),
-                  tooltip: "Detalhes"
-                }
-              ]
-            }
-          },
+          // {
+          //   column: { style: { width: "2.3rem" } },
+          //   row: {
+          //     actions: [
+          //       {
+          //         icon: "fa-solid fa-file-lines",
+          //         function: (data) => setModalDetails({ is: true, content: data }),
+          //         tooltip: "Detalhes"
+          //       }
+          //     ]
+          //   }
+          // },
         ]}
       />
     </Container>

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import { Container } from "./styles"
-import { getFaultDetectionMonitor, getFlowMonitor, getVariablesMonitor } from "@/api"
+import { getFaultDetections, getFlowMonitor, getVariablesMonitor } from "@/api"
 import _ from "lodash"
 
 import FaultDetection from "./fault-detection"
@@ -18,7 +18,7 @@ export default function MonitorClient(props: any) {
   useEffect(() => {
     setTimeout(async () => {
       const flow = await getFlowMonitor()
-      const faultDetection = await getFaultDetectionMonitor()
+      const faultDetection = await getFaultDetections()
       const variables = await getVariablesMonitor()
 
       const concat = (oldData: any, newData: any) => {

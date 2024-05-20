@@ -42,7 +42,8 @@ const TooltipProviderContainer = ({ children }: { children: React.ReactNode }) =
                 setTooltips(_.filter(tooltips, (data) => JSON.stringify(data) === JSON.stringify(getContent(target))))
             })
         })
-    }, [pathname, tooltips])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pathname])
 
     return (
         <TooltipContext.Provider

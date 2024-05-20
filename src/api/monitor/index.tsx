@@ -5,19 +5,7 @@ import _ from "lodash"
 
 export async function getFlowMonitor(credentials?: any) {
     try {
-        const { data } = await api.get("vazao")
-
-        return {
-            content: _.reverse(data?.content || [])
-        }
-    } catch (error: any) {
-        console.error(error)
-    }
-}
-
-export async function getFaultDetectionMonitor(credentials?: any) {
-    try {
-        const { data } = await api.get("previsao")
+        const { data } = await api.get("flow")
 
         return {
             content: _.reverse(data?.content || [])
