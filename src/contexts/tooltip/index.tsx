@@ -10,7 +10,12 @@ const TooltipProviderContainer = ({ children }: { children: React.ReactNode }) =
 
     const pathname = usePathname()
 
+    const [reload, setReload] = useState<any>(0)
     const [tooltips, setTooltips] = useState<any>([])
+
+    const reloadTooltip = () => {
+        setReload(reload + 1)
+    }
 
     const getContent = (target: any) => {
         const rect = target.getBoundingClientRect()
@@ -43,11 +48,14 @@ const TooltipProviderContainer = ({ children }: { children: React.ReactNode }) =
             })
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [pathname])
+    }, [pathname, reload])
 
     return (
         <TooltipContext.Provider
-            value={{ tooltips }}
+            value={{
+                tooltips,
+                reload: reloadTooltip
+            }}
         >
             {_.map(tooltips, (data, index) =>
                 <div

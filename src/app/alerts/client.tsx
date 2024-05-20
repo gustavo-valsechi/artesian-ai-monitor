@@ -83,18 +83,18 @@ export default function AlertClient({ data }: any) {
             column: "Data",
             row: { custom: (data) => moment(data.timestamp).format("DD/MM/YYYY HH:mm:ss") }
           },
-          // {
-          //   column: { style: { width: "2.3rem" } },
-          //   row: {
-          //     actions: [
-          //       {
-          //         icon: "fa-solid fa-file-lines",
-          //         function: (data) => setModalDetails({ is: true, content: data }),
-          //         tooltip: "Detalhes"
-          //       }
-          //     ]
-          //   }
-          // },
+          {
+            column: { style: { width: "2.3rem" } },
+            row: {
+              actions: [
+                {
+                  icon: "fa-solid fa-file-lines",
+                  function: (data) => setModalDetails({ is: true, content: data }),
+                  tooltip: "Detalhes"
+                }
+              ]
+            }
+          },
         ]}
       />
     </Container>

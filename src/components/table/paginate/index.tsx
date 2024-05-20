@@ -2,6 +2,7 @@
 
 import React from "react"
 import { Container } from "./styles"
+import { useTooltip } from "@/contexts/tooltip"
 import _ from "lodash"
 
 interface IPaginate {
@@ -13,6 +14,8 @@ interface IPaginate {
 }
 
 export function Paginate(props: IPaginate) {
+
+    const { reload } = useTooltip()
 
     const pages = () => {
 
@@ -36,7 +39,7 @@ export function Paginate(props: IPaginate) {
     }
 
     return Number(props.total) > 1 && (
-        <Container>
+        <Container onClick={reload}>
             <div
                 className="paginate back"
                 onClick={() => props.page.set

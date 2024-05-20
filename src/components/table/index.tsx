@@ -1,9 +1,10 @@
 "use client"
 
-import React from "react"
+import React, { useEffect } from "react"
 import { Container } from "./styles"
 import { LoadingBar } from "../loading/bar"
 import { Paginate } from "./paginate"
+import { useTooltip } from "@/contexts/tooltip"
 import Image from "next/image"
 import _ from "lodash"
 
@@ -55,6 +56,12 @@ interface ITable {
 }
 
 export function Table(props: ITable) {
+
+  const { reload } = useTooltip()
+
+  useEffect(() => {
+    reload()
+  }, [(props.loading as { is: boolean })?.is || props.loading])
 
   const rowContent = (data: any, option: any) => {
 
@@ -126,7 +133,7 @@ export function Table(props: ITable) {
                   {_.map(props.options, (data, index: number) => (
                     <td key={index}>
                       <LoadingBar
-                        height="2.4rem"
+                        height="2.5rem"
                         borderRadius={
                           index === 0
                             ? "5px 0 0 5px"
