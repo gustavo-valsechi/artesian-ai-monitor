@@ -59,9 +59,12 @@ export function Table(props: ITable) {
 
   const { reload } = useTooltip()
 
+  const loading = (props.loading as { is: boolean })?.is || props.loading
+
   useEffect(() => {
     reload()
-  }, [(props.loading as { is: boolean })?.is || props.loading])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading])
 
   const rowContent = (data: any, option: any) => {
 
@@ -127,7 +130,7 @@ export function Table(props: ITable) {
             </tr>
           </thead>
           <tbody>
-            {(props.loading as { is: boolean })?.is || props.loading
+            {loading
               ? _.map((props.loading as { items: Array<any> })?.items || [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], (data, key: number) =>
                 <tr key={key}>
                   {_.map(props.options, (data, index: number) => (
