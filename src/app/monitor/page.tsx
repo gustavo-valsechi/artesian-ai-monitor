@@ -2,6 +2,8 @@ import { getMotors, DCredentials, getFlowMonitor, getFaultDetections, getVariabl
 
 import Client from "./client"
 
+export const dynamic = 'force-dynamic'
+
 export default async function MonitorServer() {
 
     const motors = await getMotors(DCredentials)
