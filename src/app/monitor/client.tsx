@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import { Container } from "./styles"
-import { getFaultDetections, getFlowMonitor, getVariablesMonitor } from "@/api"
+import { DPagination, getFaultDetections, getFlowMonitor, getVariablesMonitor } from "@/api"
 import _ from "lodash"
 
 import FaultDetection from "./fault-detection"
@@ -14,7 +14,6 @@ export default function MonitorClient(props: any) {
 
   const [data, setData] = useState(props.data)
   const [fetcher, setFetcher] = useState(0)
-  console.log(data)
 
   useEffect(() => {
     setTimeout(async () => {
@@ -22,7 +21,7 @@ export default function MonitorClient(props: any) {
       const faultDetection = await getFaultDetections()
       const variables = await getVariablesMonitor()
 
-      const concat = (oldData: any, newData: any) => {
+      const concat = (oldData: any = DPagination, newData: any = DPagination) => {
         return {
           content: _.takeRight(_.concat(oldData.content, newData.content), 10),
           total: (oldData.total || 0) + (newData.total || 0),
@@ -36,6 +35,8 @@ export default function MonitorClient(props: any) {
         faultDetection: concat(data.faultDetection, faultDetection),
         variables: concat(data.variables, variables),
       })
+
+      console.log(fetcher)
 
       setFetcher(fetcher + 1)
     }, 5000)
