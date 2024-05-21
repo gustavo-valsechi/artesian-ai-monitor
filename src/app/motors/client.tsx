@@ -57,8 +57,8 @@ export default function MotorClient({ data }: any) {
           }
         }}
         notFound={{
-          title: "Nenhum cliente encontrado",
-          message: "Adicione um cliente para aparecer algum registro"
+          title: "Nenhum motor encontrado",
+          message: "Adicione um motor para aparecer algum registro"
         }}
         options={[
           {

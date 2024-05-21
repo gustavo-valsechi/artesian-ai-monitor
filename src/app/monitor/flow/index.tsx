@@ -9,7 +9,7 @@ import _ from 'lodash'
 export default function ChartFlow(props: any) {
 
     const monitor = props.data?.content || []
-
+    console.log("vazao", monitor)
     return (
         <Container>
             <div className="chart-header">

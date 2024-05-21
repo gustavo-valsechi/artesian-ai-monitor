@@ -14,6 +14,7 @@ export default function MonitorClient(props: any) {
 
   const [data, setData] = useState(props.data)
   const [fetcher, setFetcher] = useState(0)
+  console.log(data)
 
   useEffect(() => {
     setTimeout(async () => {
