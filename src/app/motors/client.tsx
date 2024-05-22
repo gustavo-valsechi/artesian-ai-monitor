@@ -15,6 +15,7 @@ export default function MotorClient({ data }: any) {
 
   const [modalSave, setModalSave] = useState({ is: false, content: {} })
   const [modalRemove, setModalRemove] = useState({ is: false, content: {} })
+  console.log(data);
 
   const [page, setPage] = useState(0)
   const [loading, setLoading] = useState(false)
