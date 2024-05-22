@@ -36,8 +36,6 @@ export default function MonitorClient(props: any) {
         variables: concat(data.variables, variables),
       })
 
-      console.log(fetcher)
-
       setFetcher(fetcher + 1)
     }, 5000)
     // eslint-disable-next-line react-hooks/exhaustive-deps

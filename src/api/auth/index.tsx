@@ -5,7 +5,6 @@ import _ from "lodash"
 export async function login(credentials: { username: string, password: string }) {
     try {
         // const { data } = await api.post("auth", credentials)
-        // console.log(data);
 
         // if (!data?.access_token) throw new Error("Usuário ou senha inválida, verifique e tente novamente")
 

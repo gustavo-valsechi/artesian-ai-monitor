@@ -2,8 +2,6 @@ import { DCredentials, getFaultDetections } from "@/api"
 
 import Client from "./client"
 
-export const dynamic = 'force-dynamic'
-
 export default async function AlertServer() {
 
     const monitors = await getFaultDetections({
