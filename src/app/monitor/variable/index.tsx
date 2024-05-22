@@ -50,7 +50,7 @@ export default function ChartVariables(props: any) {
                 <div className="chart-body">
                     <Chart
                         content={monitor}
-                        xAxis={(data) => moment(data.timestamp).format("DD/MM HH:mm:ss")}
+                        xAxis={(data) => moment(data.timestamp).subtract(3, 'hours').format("DD/MM HH:mm:ss")}
                         yAxis={_.fromPairs(_.map(motors, (motor) => [motor.tag, (data) => _.round(data?.[props.name] || 0, 2)]))}
                         colors={colors}
                     />

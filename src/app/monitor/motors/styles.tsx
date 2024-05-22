@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
+export const Container = styled.div<{ notFound?: boolean }>`
     display: flex;
     align-items: stretch;
     justify-content: space-between;
@@ -126,5 +126,19 @@ export const Container = styled.div`
                 }
             }
         }
+    }
+
+    .motors-not-found {
+        width: 100%;
+        height: 5rem;
+        border-radius: 5px;
+        border: 1px dashed ${({ theme }) => theme.transparent_1};
+        color: ${({ theme }) => theme.transparent_3};
+        font-size: .9rem;
+        font-weight: 500;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 `;

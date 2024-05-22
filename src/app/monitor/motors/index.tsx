@@ -23,38 +23,42 @@ export default function Motors({ data }: any) {
 
     return (
         <Container>
-            {_.map(motors, (motor: any, index) =>
-                <div key={index} className="content">
-                    <div className="content-left">
-                        <Image priority src={motorIcon} alt={motor.tag} />
-                    </div>
-                    <div className="content-right">
-                        <div className="content-header">
-                            <div className="content-info">
-                                <span>{motor.tag}</span>
-                                <span>{motor.descricao}</span>
+            {!!motors.length
+                ? _.map(motors, (motor: any, index) =>
+                    <div key={index} className="content">
+                        <div className="content-left">
+                            <Image priority src={motorIcon} alt={motor.tag} />
+                        </div>
+                        <div className="content-right">
+                            <div className="content-header">
+                                <div className="content-info">
+                                    <span>{motor.tag}</span>
+                                    <span>{motor.descricao}</span>
+                                </div>
+                                <div
+                                    className="content-status"
+                                    data-status={status(motor)}
+                                >
+                                    {_.lowerCase(status(motor))}
+                                </div>
                             </div>
-                            <div
-                                className="content-status"
-                                data-status={status(motor)}
-                            >
-                                {_.lowerCase(status(motor))}
+                            <div className="content-footer">
+                                <div className="content-params">
+                                    {_.map(Utils.format.params(motor), (value: string, key: string) =>
+                                        <div key={key}>
+                                            <span>
+                                                {value}
+                                            </span>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                        <div className="content-footer">
-                            <div className="content-params">
-                                {_.map(Utils.format.params(motor), (value: string, key: string) =>
-                                    <div key={key}>
-                                        <span>
-                                            {value}
-                                        </span>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
                     </div>
-                </div>
-            )}
+                )
+                : <div className='motors-not-found'>
+                    Nenhum motor encontrado para monitorar
+                </div>}
         </Container>
     )
 }

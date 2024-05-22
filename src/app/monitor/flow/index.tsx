@@ -21,7 +21,7 @@ export default function ChartFlow(props: any) {
             <div className="chart-body">
                 <Chart
                     content={monitor}
-                    xAxis={(data) => moment(data.timestamp).format("DD/MM HH:mm:ss")}
+                    xAxis={(data) => moment(data.timestamp).subtract(3, 'hours').format("DD/MM HH:mm:ss")}
                     yAxis={{ "Vazão": (data) => _.round(data?.vazao_registrada || 0, 3) }}
                     colors={["secondary"]}
                     min={20}

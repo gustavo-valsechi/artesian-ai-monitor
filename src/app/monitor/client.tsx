@@ -44,8 +44,8 @@ export default function MonitorClient(props: any) {
   return (
     <Container>
       <Motors data={data} />
-      <FaultDetection data={data.faultDetection} />
-      <Flow data={data.flow} />
+      <FaultDetection data={data?.motors?.content?.length ? data.faultDetection : DPagination} />
+      <Flow data={data?.motors?.content?.length ? data.flow : DPagination} />
       <Variable
         icon="fa-solid fa-wave-square"
         label="Frequência"

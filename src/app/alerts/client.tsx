@@ -81,7 +81,7 @@ export default function AlertClient({ data }: any) {
           },
           {
             column: "Data",
-            row: { custom: (data) => moment(data.timestamp).format("DD/MM/YYYY HH:mm:ss") }
+            row: { custom: (data) => moment(data.timestamp).subtract(3, 'hours').format("DD/MM/YYYY HH:mm:ss") }
           },
           {
             column: { style: { width: "2.3rem" } },
