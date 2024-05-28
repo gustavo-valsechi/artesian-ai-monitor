@@ -73,7 +73,7 @@ export default function AlertClient({ data }: any) {
           {
             column: "Mensagem",
             row: {
-              name: "message",
+              custom: (data) => Number(data.previsao_registrada) ? "Falha detectada" : "Nenhuma falha detectada",
               style: (data) => data.read
                 ? { fontWeight: 400 }
                 : { fontWeight: 600 }

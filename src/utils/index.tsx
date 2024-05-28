@@ -111,13 +111,15 @@ export default class Utils {
                 .replace(/(\d{5})(\d)/, "$1-$2")
                 .replace(/(-\d{4})\d+?$/, "$1")
         },
-        percent: (value: any) => {
+        kilo: (value: any) => {
             if (!value) return ""
 
-            value = value.replace(/\D-+/g, "")
+            value = value.replace(/\D\./g, "")
 
-            if (value.length > 2) {
-                value = String((value * 100)).replace(/([0-9]{2})$/g, ",$1")
+            if (_.includes(value, ".")) {
+                const [left, right] = _.split(value, ".")
+
+                value = `${_.replace(left, /\D/g, "").substring(0, 3)}.${_.replace(right, /\D/g, "").substring(0, 2)}`
             }
 
             return value

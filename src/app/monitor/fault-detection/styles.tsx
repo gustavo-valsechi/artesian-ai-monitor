@@ -11,7 +11,6 @@ export const Container = styled.div<{ hasFault: boolean }>`
         padding: 1rem 1.3rem;
         color: ${({ theme, hasFault }) => hasFault ? theme.negative : theme.transparent_6};
         border-bottom: 1px solid ${(props) => props.theme.transparent_05};
-        cursor: pointer;
 
         .chart-header-label {
             display: flex;

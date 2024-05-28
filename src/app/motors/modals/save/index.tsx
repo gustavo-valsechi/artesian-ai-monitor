@@ -3,6 +3,7 @@ import { Container } from './styles'
 import { Form, Modal } from '@/components'
 import { saveMotor } from '@/api'
 import { z } from 'zod'
+import Utils from '@/utils'
 import _ from 'lodash'
 
 export default function ModalSave(props: any) {
@@ -18,7 +19,7 @@ export default function ModalSave(props: any) {
     const onSubmit = async (data: any) => {
         setSaving(true)
 
-        await saveMotor({ ...data, "id": content.id })
+        await saveMotor({ ...data, "id_motor": content.id_motor })
 
         await props.fetch(0)
 
@@ -34,24 +35,24 @@ export default function ModalSave(props: any) {
             onClose={close}
             header={{
                 icon: "fa-solid fa-bullseye",
-                title: content.id ? "Editar motor" : "Adicionar motor"
+                title: content.id_motor ? "Editar motor" : "Adicionar motor"
             }}
         >
             <Container>
                 <Form
                     onSubmit={onSubmit}
                     initialValues={{
-                        "id": content.id || "",
-                        "name": content.name || "",
-                        "model": content.model || "",
-                        "power": String(content.power || ""),
-                        "voltage": String(content.voltage || ""),
-                        "current": String(content.current || ""),
-                        "frequency": String(content.frequency || ""),
+                        "id_motor": content.id_motor || "",
+                        "tag": content.tag || "",
+                        "descricao": content.descricao || "",
+                        "potencia": String(content.potencia || ""),
+                        "tensao": String(content.tensao || ""),
+                        "corrente": String(content.corrente || ""),
+                        "frequencia": String(content.frequencia || ""),
                     }}
                     inputs={[
                         {
-                            name: "name",
+                            name: "tag",
                             label: "Nome",
                             disabled: saving,
                             validation: z.string({ required_error: "Campo obrigatório!" }),
@@ -59,16 +60,25 @@ export default function ModalSave(props: any) {
                             required: true
                         },
                         {
-                            name: "model",
-                            label: "Modelo",
+                            name: "descricao",
+                            label: "Descrição",
                             disabled: saving,
                             validation: z.string({ required_error: "Campo obrigatório!" }),
                             maxLenght: 255,
                             required: true
                         },
                         {
-                            name: "power",
-                            label: "Potência",
+                            name: "potencia",
+                            label: "Potência (kW)",
+                            disabled: saving,
+                            mask: Utils.mask.kilo,
+                            validation: z.string({ required_error: "Campo obrigatório!" }),
+                            maxLenght: 10,
+                            required: true
+                        },
+                        {
+                            name: "tensao",
+                            label: "Tensão (V)",
                             disabled: saving,
                             mask: (value: string) => _.replace(value, /\D/g, ""),
                             validation: z.string({ required_error: "Campo obrigatório!" }),
@@ -76,8 +86,8 @@ export default function ModalSave(props: any) {
                             required: true
                         },
                         {
-                            name: "voltage",
-                            label: "Tensão",
+                            name: "corrente",
+                            label: "Corrente (A)",
                             disabled: saving,
                             mask: (value: string) => _.replace(value, /\D/g, ""),
                             validation: z.string({ required_error: "Campo obrigatório!" }),
@@ -85,17 +95,8 @@ export default function ModalSave(props: any) {
                             required: true
                         },
                         {
-                            name: "current",
-                            label: "Corrente",
-                            disabled: saving,
-                            mask: (value: string) => _.replace(value, /\D/g, ""),
-                            validation: z.string({ required_error: "Campo obrigatório!" }),
-                            maxLenght: 10,
-                            required: true
-                        },
-                        {
-                            name: "frequency",
-                            label: "Frequência",
+                            name: "frequencia",
+                            label: "Frequência (hZ)",
                             disabled: saving,
                             mask: (value: string) => _.replace(value, /\D/g, ""),
                             validation: z.string({ required_error: "Campo obrigatório!" }),
@@ -105,7 +106,7 @@ export default function ModalSave(props: any) {
                     ]}
                     buttons={[
                         {
-                            label: content.id ? "salvar" : "adicionar",
+                            label: content.id_motor ? "salvar" : "adicionar",
                             type: "submit",
                             loading: saving
                         },

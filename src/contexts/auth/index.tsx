@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }: {
         const tokenStorage = sessionStorage.getItem("@token")
         const userStorage = sessionStorage.getItem("@user")
 
-        if (!tokenStorage) {
+        if (!token && !tokenStorage) {
             router.push("/auth/login")
             return
         }

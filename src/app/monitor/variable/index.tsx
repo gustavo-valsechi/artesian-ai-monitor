@@ -51,7 +51,10 @@ export default function ChartVariables(props: any) {
                     <Chart
                         content={monitor}
                         xAxis={(data) => moment(data.timestamp).subtract(3, 'hours').format("DD/MM HH:mm:ss")}
-                        yAxis={_.fromPairs(_.map(motors, (motor) => [motor.tag, (data) => _.round(data?.[props.name] || 0, 2)]))}
+                        yAxis={_.fromPairs(_.map(motors, (motor) => [
+                            motor.tag,
+                            (data) => data?.id_motor === motor.id_motor ? _.round(data?.[props.name] || 0, 2) : 0
+                        ]))}
                         colors={colors}
                     />
                 </div>}

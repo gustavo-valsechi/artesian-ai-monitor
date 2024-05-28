@@ -77,7 +77,7 @@ export default function MotorClient({ data }: any) {
             }
           },
           {
-            column: "Tag",
+            column: "Nome",
             row: { name: "tag", style: { fontWeight: 600 } }
           },
           {

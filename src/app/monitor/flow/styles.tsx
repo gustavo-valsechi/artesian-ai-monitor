@@ -10,7 +10,6 @@ export const Container = styled.div`
         padding: 1rem 1.3rem;
         color: ${({ theme }) => theme.transparent_6};
         border-bottom: 1px solid ${(props) => props.theme.transparent_05};
-        cursor: pointer;
 
         .chart-header-label {
             display: flex;

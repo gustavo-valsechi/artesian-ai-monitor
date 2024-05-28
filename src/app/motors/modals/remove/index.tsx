@@ -16,7 +16,7 @@ export default function ModalRemove(props: any) {
     const onSubmit = async (data: any) => {
         setRemoving(true)
 
-        await removeMotor(content.id)
+        await removeMotor(content.id_motor)
 
         await props.fetch(0)
 

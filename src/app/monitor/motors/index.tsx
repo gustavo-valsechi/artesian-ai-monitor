@@ -7,6 +7,7 @@ import Image from 'next/image'
 import _ from 'lodash'
 
 import motorIcon from "@/assets/motor.png"
+import moment from 'moment'
 
 export default function Motors({ data }: any) {
 
@@ -32,8 +33,8 @@ export default function Motors({ data }: any) {
                         <div className="content-right">
                             <div className="content-header">
                                 <div className="content-info">
+                                    <span>#{moment(motor.timestamp).format("DDMMYYYY")}</span>
                                     <span>{motor.tag}</span>
-                                    <span>{motor.descricao}</span>
                                 </div>
                                 <div
                                     className="content-status"

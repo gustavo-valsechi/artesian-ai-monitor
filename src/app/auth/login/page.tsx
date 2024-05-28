@@ -22,6 +22,7 @@ export default function Login(props: any) {
 
         if (token) {
             setToken(token)
+            console.log(token)
             router.push("/monitor")
         }
 
