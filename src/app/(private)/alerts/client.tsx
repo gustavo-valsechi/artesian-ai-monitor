@@ -5,7 +5,7 @@ import { Container } from "./styles"
 import { Table } from "@/components"
 import moment from "moment"
 
-import { DCredentials, getFaultDetections } from "@/api"
+import { DCredentials, getFaultDetections } from "@/app/api"
 
 import ModalDetails from "./modals/details"
 
@@ -50,7 +50,7 @@ export default function AlertClient({ data }: any) {
         }}
         notFound={{
           title: "Nenhum alerta encontrado",
-          message: "Nenhuma ocorrência encontrada pelo monitoramento"
+          message: "Nenhuma detecção de falha encontrada pelo monitoramento"
         }}
         options={[
           {

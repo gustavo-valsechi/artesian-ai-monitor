@@ -1,4 +1,4 @@
-import { api } from "../"
+import { api } from ".."
 import _ from "lodash"
 
 export async function getFlowMonitor(credentials?: any) {
@@ -9,7 +9,7 @@ export async function getFlowMonitor(credentials?: any) {
             content: _.reverse(data?.content || [])
         }
     } catch (error: any) {
-        console.error(error)
+        // console.error(error)
     }
 }
 
@@ -21,6 +21,6 @@ export async function getVariablesMonitor(credentials?: any) {
             content: _.reverse(data?.content || [])
         }
     } catch (error: any) {
-        console.error(error)
+        // console.error(error)
     }
 }

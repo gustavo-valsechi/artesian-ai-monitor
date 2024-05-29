@@ -1,10 +1,10 @@
-import { getMotors, DCredentials, getFlowMonitor, getFaultDetections, getVariablesMonitor } from "@/api"
+import { getMotors, DCredentials, getFlowMonitor, getFaultDetections, getVariablesMonitor } from "@/app/api"
 
 import Client from "./client"
 
 export const dynamic = 'force-dynamic'
 
-export default async function MonitorServer() {
+export default async function MonitorServer(context) {
 
     const motors = await getMotors(DCredentials)
     const flow = await getFlowMonitor()

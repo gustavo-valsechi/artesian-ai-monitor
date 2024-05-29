@@ -1,4 +1,4 @@
-import { api } from "../"
+import { api } from ".."
 import _ from "lodash"
 
 export async function getFaultDetections(credentials?: any) {

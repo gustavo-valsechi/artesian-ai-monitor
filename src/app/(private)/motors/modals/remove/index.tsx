@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Container } from './styles'
 import { Modal } from '@/components'
-import { removeMotor } from '@/api'
+import { removeMotor } from '@/app/api'
 
 export default function ModalRemove(props: any) {
 

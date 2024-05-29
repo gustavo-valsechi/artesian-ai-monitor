@@ -1,4 +1,4 @@
-import { DCredentials, getMotors } from "@/api"
+import { DCredentials, getMotors } from "@/app/api"
 
 import Client from "./client"
 

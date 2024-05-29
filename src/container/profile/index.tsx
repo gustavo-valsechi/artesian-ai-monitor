@@ -2,11 +2,13 @@
 
 import React from "react"
 import { Container } from "./styles"
-import { useAuth } from "@/contexts/auth"
 import { Modal } from "@/components"
+import { signOut } from "next-auth/react"
+import { useRouter } from "next/navigation"
 import _ from "lodash"
 
 interface IProps {
+    user: any
     toggle: {
         value: boolean
         set: Function
@@ -15,21 +17,22 @@ interface IProps {
 
 export default function Profile(props: IProps) {
 
-    const { logout, user } = useAuth()
+    const router = useRouter()
 
     const menu = [
-        { 
-            icon: "fa-solid fa-user", 
-            label: "Alterar perfil", 
-            function: () => { } 
+        {
+            icon: "fa-solid fa-user",
+            label: "Alterar perfil",
+            function: () => { }
         },
-        { 
-            icon: "fa-solid fa-arrow-right-from-bracket", 
-            label: "Sair", 
-            function: () => {
-                logout()
+        {
+            icon: "fa-solid fa-arrow-right-from-bracket",
+            label: "Sair",
+            function: async () => {
+                await signOut({ redirect: false })
+                router.push("/auth/login")
                 props.toggle.set(false)
-            } 
+            }
         },
     ]
 
@@ -47,8 +50,8 @@ export default function Profile(props: IProps) {
                 </div>
                 <div className="profile-body">
                     <div className="profile-content">
-                        <span>{user.name}</span>
-                        <span>{user.email}</span>
+                        <span>{props.user?.name}</span>
+                        <span>{props.user?.email}</span>
                     </div>
                     <div className="profile-menu">
                         {_.map(menu, (data, index) =>

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react"
 import { Container } from "./styles"
-import { DPagination, getFaultDetections, getFlowMonitor, getVariablesMonitor } from "@/api"
+import { DPagination, getFaultDetections, getFlowMonitor, getVariablesMonitor } from "@/app/api"
 import _ from "lodash"
 
 import FaultDetection from "./fault-detection"

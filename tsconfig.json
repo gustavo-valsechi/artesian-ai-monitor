@@ -26,6 +26,9 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "next-auth/config": [
+        "./src/app/api/auth"
       ]
     }
   },

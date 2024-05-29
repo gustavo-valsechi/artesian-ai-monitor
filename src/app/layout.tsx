@@ -1,10 +1,11 @@
 import type { Metadata } from "next"
 import { ThemeProvider } from "@/contexts/theme"
-import { AuthProvider } from "@/contexts/auth"
 import { Toaster } from "react-hot-toast"
 import { TooltipProvider } from "@/contexts/tooltip"
-import GlobalStyles from "./global.styles"
+import { authOptions } from "next-auth/config"
+import { getServerSession } from "next-auth"
 import StyledComponentsRegistry from "@/tools/registry"
+import GlobalStyles from "./global.styles"
 
 import Container from "../container"
 
@@ -14,6 +15,9 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
+
+    const { user }: any = await getServerSession(authOptions) || { user: {} }
+
     return (
         <html lang="pt-br">
             <head>
@@ -25,19 +29,17 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <body>
                 <StyledComponentsRegistry>
                     <ThemeProvider>
-                        <AuthProvider>
-                            <GlobalStyles />
-                            <Toaster
-                                position="top-center"
-                                reverseOrder={false}
-                                containerStyle={{ fontSize: ".85rem", fontWeight: "500" }}
-                            />
-                            <TooltipProvider>
-                                <Container>
-                                    {children}
-                                </Container>
-                            </TooltipProvider>
-                        </AuthProvider>
+                        <GlobalStyles />
+                        <Toaster
+                            position="top-center"
+                            reverseOrder={false}
+                            containerStyle={{ fontSize: ".85rem", fontWeight: "500" }}
+                        />
+                        <TooltipProvider>
+                            <Container user={user}>
+                                {children}
+                            </Container>
+                        </TooltipProvider>
                     </ThemeProvider>
                 </StyledComponentsRegistry>
             </body>

@@ -33,11 +33,11 @@ const ThemeProviderContainer = ({ children }: { children: React.ReactNode }) => 
     const [theme, setTheme] = useState("light")
 
     useEffect(() => {
-        setTheme(sessionStorage.getItem("@theme") || "light")
+        setTheme(localStorage.getItem("@theme") || "light")
     }, [])
 
     useEffect(() => {
-        sessionStorage.setItem("@theme", theme)
+        localStorage.setItem("@theme", theme)
     }, [theme])
 
     const THEME_CONTENT: ITheme = {

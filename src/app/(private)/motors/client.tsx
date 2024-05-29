@@ -6,7 +6,7 @@ import { Table } from "@/components"
 import Utils from "@/utils"
 import _ from "lodash"
 
-import { DCredentials, getMotors } from "@/api"
+import { DCredentials, getMotors } from "@/app/api"
 
 import ModalSave from "./modals/save"
 import ModalRemove from "./modals/remove"
@@ -58,7 +58,7 @@ export default function MotorClient({ data }: any) {
         }}
         notFound={{
           title: "Nenhum motor encontrado",
-          message: "Adicione um motor para aparecer algum registro"
+          message: "Adicione um motor para começar o monitoramento"
         }}
         options={[
           {

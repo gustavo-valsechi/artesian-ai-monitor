@@ -4,13 +4,13 @@ import React from "react"
 import { Container } from "./styles"
 import { usePathname } from "next/navigation"
 import { Logo } from "@/components"
-import { useAuth } from "@/contexts/auth"
 import Link from "next/link"
-import _ from "lodash"
 import Image from "next/image"
+import _ from "lodash"
 
 interface IProps {
     show: boolean
+    user: any
     navigation: any[]
     profile: {
         value: boolean
@@ -21,7 +21,6 @@ interface IProps {
 export default function Menu(props: IProps) {
 
     const pathname = usePathname()
-    const { user } = useAuth()
 
     return (
         <Container show={props.show}>
@@ -66,8 +65,8 @@ export default function Menu(props: IProps) {
                     <div className="profile-content">
                         <i aria-hidden className="fa-solid fa-circle-user" />
                         <div>
-                            <label>{user.name}</label>
-                            <label>{user.email}</label>
+                            <label>{props.user?.name}</label>
+                            <label>{props.user?.email}</label>
                         </div>
                     </div>
                     <button onClick={() => props.profile.set(true)} title="Perfil">

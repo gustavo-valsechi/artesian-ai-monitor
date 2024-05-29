@@ -1,4 +1,4 @@
-import { DCredentials, getFaultDetections } from "@/api"
+import { DCredentials, getFaultDetections } from "@/app/api"
 
 import Client from "./client"
 

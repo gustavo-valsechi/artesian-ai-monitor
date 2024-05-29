@@ -20,7 +20,10 @@ export interface INavigation {
     amount?: number
 }
 
-export default function MainContainer({ children }: { children: React.ReactNode }) {
+export default function MainContainer({ children, user }: {
+    children: React.ReactNode
+    user: any
+}) {
 
     const pathname = usePathname()
 
@@ -41,7 +44,7 @@ export default function MainContainer({ children }: { children: React.ReactNode 
             route: "/motors"
         },
         {
-            icon: "fa-solid fa-bell",
+            icon: "fa-solid fa-circle-exclamation",
             label: "Alertas",
             route: "/alerts",
         },
@@ -57,15 +60,20 @@ export default function MainContainer({ children }: { children: React.ReactNode 
         <Container>
             {!!loading && <LoadingPage />}
             <Profile
+                user={user}
                 toggle={{ value: profile, set: setProfile }}
             />
             <Menu
+                user={user}
                 show={privateRoutes}
                 navigation={navigation}
                 profile={{ value: profile, set: setProfile }}
             />
             <div className="main-container">
-                <Header navigation={navigation} />
+                <Header
+                    user={user}
+                    navigation={navigation}
+                />
                 {children}
             </div>
         </Container>

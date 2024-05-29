@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Container } from './styles'
 import { Form, Modal } from '@/components'
-import { saveMotor } from '@/api'
+import { saveMotor } from '@/app/api'
 import { z } from 'zod'
 import Utils from '@/utils'
 import _ from 'lodash'
