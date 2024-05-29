@@ -1,7 +1,7 @@
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { api } from "../"
 
-const secret = process.env.NEXTAUTH_SECRET || "http://localhost:5000/auth"
+const secret = process.env.NEXTAUTH_SECRET || "https://api-artesian-ai-monitor.onrender.com/auth"
 
 export const authOptions: any = {
     debug: process.env.NODE_ENV !== "production",
