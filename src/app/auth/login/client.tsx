@@ -22,11 +22,10 @@ export default function LoginClient(props: any) {
 
         if (login.error) {
             toast.error("Usuário ou senha inválida, verifique e tente novamente!")
+            setLoading(false)
         } else {
             router.push("/monitor")
         }
-
-        setLoading(false)
     }
 
     return (

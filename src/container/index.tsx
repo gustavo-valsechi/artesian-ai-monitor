@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react"
 import { Container } from "./styles"
 import { usePathname } from "next/navigation"
 import { LoadingPage } from "@/components"
+import { getSession } from "next-auth/react"
 import _ from "lodash"
 
 import motor from "@/assets/motor.png"
@@ -20,13 +21,14 @@ export interface INavigation {
     amount?: number
 }
 
-export default function MainContainer({ children, user }: {
+export default function MainContainer(props: {
     children: React.ReactNode
     user: any
 }) {
 
     const pathname = usePathname()
 
+    const [user, setUser] = useState(props.user)
     const [loading, setLoading] = useState(true)
     const [profile, setProfile] = useState(false)
 
@@ -56,6 +58,15 @@ export default function MainContainer({ children, user }: {
         }, 300)
     }, [])
 
+    useEffect(() => {
+        if (user?.token || !privateRoutes) return
+
+        (async () => {
+            const session = await getSession()
+            setUser(session?.user)
+        })()
+    }, [user, pathname, privateRoutes])
+
     return (
         <Container>
             {!!loading && <LoadingPage />}
@@ -74,7 +85,7 @@ export default function MainContainer({ children, user }: {
                     user={user}
                     navigation={navigation}
                 />
-                {children}
+                {props.children}
             </div>
         </Container>
     )

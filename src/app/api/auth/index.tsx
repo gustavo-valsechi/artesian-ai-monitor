@@ -7,7 +7,7 @@ export const authOptions: any = {
     debug: process.env.NODE_ENV !== "production",
     secret,
     session: { strategy: "jwt" },
-    jwt: { secret },
+    jwt: { secret, maxAge: 43200 },
     pages: {
         signIn: "/auth/login",
         error: "/auth/login",

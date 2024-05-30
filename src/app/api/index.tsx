@@ -6,8 +6,7 @@ import { redirect } from "next/navigation"
 import _ from "lodash"
 
 export const api = axios.create({
-    // baseURL: "http://localhost:5000",
-    baseURL: "https://api-artesian-ai-monitor.onrender.com",
+    baseURL: process.env.NEXTAPI_URL || "https://api-artesian-ai-monitor.onrender.com",
 })
 
 async function getAuthToken() {
@@ -17,6 +16,23 @@ async function getAuthToken() {
     else session = await getSession()
 
     return session?.user?.token
+}
+
+async function redirectToLogin(ctx: any = null) {
+    if (typeof window !== 'undefined') {
+        if (window.location.pathname === "/auth/login") return
+        window.location.href = '/auth/login'
+        return
+    }
+
+    if (ctx?.res) {
+        ctx.res.writeHead(302, { Location: '/auth/login' })
+        ctx.res.end()
+        return
+    } else {
+        redirect("/auth/login")
+        return
+    }
 }
 
 api.interceptors.request.use(
@@ -31,16 +47,21 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
     (response) => response,
-    async (error: AxiosError) => {
+    async (error: any) => {
 
         const response: any = error.response?.data || {}
 
+        const authErrors = [
+            "Missing Authorization Header",
+            "Token has expired",
+        ]
+
         if (
-            response.msg === "Token has expired"
+            _.includes(authErrors, response.msg)
             && typeof window !== 'undefined'
         ) {
             await signOut({ redirect: false })
-            redirect("/auth/login")
+            redirectToLogin(error?.config?.ctx)
         }
 
         return Promise.reject(error)
