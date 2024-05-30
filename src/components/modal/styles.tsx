@@ -89,7 +89,7 @@ export const Container = styled.div`
       border-bottom: 1px solid rgb(0, 0, 0, 0.2);
 
       .modal-nummus-title {
-        color: #333;
+        color: ${({ theme }) => theme.transparent_6};
         font-size: 1rem;
         font-weight: 500;
 
@@ -103,12 +103,12 @@ export const Container = styled.div`
       }
 
       .fa-xmark {
-        color: rgb(0, 0, 0, 0.6);
+        color: ${({ theme }) => theme.transparent_6};
         margin-left: .5rem;
         cursor: pointer;
 
         &:hover {
-          color: rgb(0, 0, 0, 1);
+          color: ${({ theme }) => theme.transparent_8};
         }
       }
     }

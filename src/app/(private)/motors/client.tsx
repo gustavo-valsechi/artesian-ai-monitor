@@ -72,7 +72,7 @@ export default function MotorClient({ data }: any) {
             },
             row: {
               image: {
-                icon: "fa-solid fa-bullseye"
+                icon: "fa-solid fa-gear"
               }
             }
           },

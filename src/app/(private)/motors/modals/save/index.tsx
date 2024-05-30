@@ -34,7 +34,7 @@ export default function ModalSave(props: any) {
             toggle={!!props.modal.value.is}
             onClose={close}
             header={{
-                icon: "fa-solid fa-bullseye",
+                icon: "fa-solid fa-gear",
                 title: content.id_motor ? "Editar motor" : "Adicionar motor"
             }}
         >
