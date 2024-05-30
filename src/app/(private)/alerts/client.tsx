@@ -64,9 +64,7 @@ export default function AlertClient({ data }: any) {
             },
             row: {
               image: {
-                icon: (data: any) => data.read
-                  ? "fa-regular fa-bell"
-                  : "fa-solid fa-bell"
+                icon: "fa-solid fa-circle-exclamation"
               }
             }
           },
