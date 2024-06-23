@@ -30,7 +30,7 @@ export default function ChartFaultDetection(props: any) {
                 <Chart
                     content={monitor}
                     xAxis={(data) => moment(data.timestamp).subtract(3, 'hours').format("DD/MM HH:mm:ss")}
-                    yAxis={{ "Falha": (data) => _.round(data?.previsao_registrada || 0, 3) }}
+                    yAxis={{ "Anomalia": (data) => _.round(data?.previsao_registrada || 0, 3) }}
                     colors={["negative"]}
                     height={120}
                     min={0}
