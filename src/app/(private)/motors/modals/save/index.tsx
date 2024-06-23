@@ -43,7 +43,6 @@ export default function ModalSave(props: any) {
                     onSubmit={onSubmit}
                     initialValues={{
                         "id_motor": content.id_motor || "",
-                        "referencia": content.referencia || "",
                         "tag": content.tag || "",
                         "descricao": content.descricao || "",
                         "potencia": String(content.potencia || ""),
@@ -53,16 +52,8 @@ export default function ModalSave(props: any) {
                     }}
                     inputs={[
                         {
-                            name: "referencia",
-                            label: "Referência",
-                            disabled: saving,
-                            validation: z.string({ required_error: "Campo obrigatório!" }),
-                            maxLenght: 255,
-                            required: true
-                        },
-                        {
                             name: "tag",
-                            label: "Nome",
+                            label: "Tag",
                             disabled: saving,
                             validation: z.string({ required_error: "Campo obrigatório!" }),
                             maxLenght: 255,
@@ -70,7 +61,7 @@ export default function ModalSave(props: any) {
                         },
                         {
                             name: "descricao",
-                            label: "Descrição",
+                            label: "Nome",
                             disabled: saving,
                             validation: z.string({ required_error: "Campo obrigatório!" }),
                             maxLenght: 255,

@@ -32,8 +32,8 @@ export default function Motors({ data }: any) {
                         <div className="content-right">
                             <div className="content-header">
                                 <div className="content-info">
-                                    <span>#{motor.referencia}</span>
-                                    <span>{motor.tag}</span>
+                                    <span>#{motor.tag}</span>
+                                    <span>{motor.descricao}</span>
                                 </div>
                                 <div
                                     className="content-status"
