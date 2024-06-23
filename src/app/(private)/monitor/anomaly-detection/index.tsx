@@ -23,7 +23,7 @@ export default function ChartFaultDetection(props: any) {
             >
                 <div className="chart-header-label">
                     <i aria-hidden className="fa-solid fa-circle-exclamation" />
-                    <span>Detecção de anomalia</span>
+                    <span>Detecção de anomalias</span>
                 </div>
             </div>
             <div className="chart-body">
