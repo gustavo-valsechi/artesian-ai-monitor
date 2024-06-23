@@ -22,6 +22,8 @@ export default function MonitorClient(props: any) {
       const variables = await getVariablesMonitor()
 
       const concat = (oldData: any = DPagination, newData: any = DPagination) => {
+        if (JSON.stringify(oldData) === JSON.stringify(newData)) return newData
+
         return {
           content: _.takeRight(_.concat(oldData.content, newData.content), 10),
           total: (oldData.total || 0) + (newData.total || 0),
