@@ -5,11 +5,11 @@ import { Container } from "./styles"
 import { Table } from "@/components"
 import moment from "moment"
 
-import { DCredentials, getFaultDetections } from "@/app/api"
+import { DCredentials, getAnomalies } from "@/app/api"
 
 import ModalDetails from "./modals/details"
 
-export default function AlertClient({ data }: any) {
+export default function AnomalyClient({ data }: any) {
 
   const [modalDetails, setModalDetails] = useState({ is: false, content: {} })
   const [page, setPage] = useState(0)
@@ -20,7 +20,7 @@ export default function AlertClient({ data }: any) {
     setPage(page || 0)
     setLoading(true)
 
-    const data = await getFaultDetections({
+    const data = await getAnomalies({
       ...DCredentials,
       filters: { previsao_registrada: 1 },
       offset: page
@@ -49,8 +49,8 @@ export default function AlertClient({ data }: any) {
           }
         }}
         notFound={{
-          title: "Nenhum alerta encontrado",
-          message: "Nenhuma detecção de falha encontrada pelo monitoramento"
+          title: "Nenhuma anomalia encontrada",
+          message: "Nenhuma detecção de anomalia encontrada pelo monitoramento"
         }}
         options={[
           {
@@ -69,12 +69,10 @@ export default function AlertClient({ data }: any) {
             }
           },
           {
-            column: "Mensagem",
+            column: "Motor",
             row: {
-              custom: (data) => Number(data.previsao_registrada) ? "Falha detectada" : "Nenhuma falha detectada",
-              style: (data) => data.read
-                ? { fontWeight: 400 }
-                : { fontWeight: 600 }
+              custom: (data) => data.tag_motor,
+              style: { fontWeight: 600 }
             },
           },
           {

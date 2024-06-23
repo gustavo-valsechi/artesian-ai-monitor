@@ -2,11 +2,11 @@
 
 import React, { useEffect, useState } from "react"
 import { Container } from "./styles"
-import { DPagination, getFaultDetections, getFlowMonitor, getVariablesMonitor } from "@/app/api"
+import { DPagination, getAnomalies, getFlowMonitor, getVariablesMonitor } from "@/app/api"
 import _ from "lodash"
 
-import FaultDetection from "./fault-detection"
-import Flow from "./flow"
+import FaultDetection from "./anomaly-detection"
+// import Flow from "./flow"
 import Motors from "./motors"
 import Variable from "./variable"
 
@@ -18,7 +18,7 @@ export default function MonitorClient(props: any) {
   useEffect(() => {
     setTimeout(async () => {
       const flow = await getFlowMonitor()
-      const faultDetection = await getFaultDetections()
+      const faultDetection = await getAnomalies()
       const variables = await getVariablesMonitor()
 
       const concat = (oldData: any = DPagination, newData: any = DPagination) => {

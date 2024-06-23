@@ -1,12 +1,12 @@
-import { DCredentials, getFaultDetections } from "@/app/api"
+import { DCredentials, getAnomalies } from "@/app/api"
 
 import Client from "./client"
 
 export const dynamic = 'force-dynamic'
 
-export default async function AlertServer() {
+export default async function AnomalyServer() {
 
-    const monitors = await getFaultDetections({
+    const monitors = await getAnomalies({
         ...DCredentials,
         filters: { previsao_registrada: 1 }
     })

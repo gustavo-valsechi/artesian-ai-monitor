@@ -1,7 +1,7 @@
 import { api } from ".."
 import _ from "lodash"
 
-export async function getFaultDetections(credentials?: any) {
+export async function getAnomalies(credentials?: any) {
     try {
         const { data } = await api.get("fault-detection", { params: credentials })
 

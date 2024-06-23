@@ -47,8 +47,8 @@ export default function MainContainer(props: {
         },
         {
             icon: "fa-solid fa-circle-exclamation",
-            label: "Alertas",
-            route: "/alerts",
+            label: "Anomalias",
+            route: "/anomalies",
         },
     ]
 

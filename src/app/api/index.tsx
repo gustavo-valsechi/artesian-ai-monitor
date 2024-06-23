@@ -68,7 +68,7 @@ api.interceptors.response.use(
     }
 )
 
-export * from "./alerts"
+export * from "./anomalies"
 export * from "./monitor"
 export * from "./motors"
 
