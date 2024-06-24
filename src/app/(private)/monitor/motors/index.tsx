@@ -13,14 +13,6 @@ export default function Motors({ data }: any) {
     const motors = data?.motors?.content || []
     const monitor = data?.variables?.content || []
 
-    const status = (motor: any) => {
-        const motorLog = _.filter(monitor, (data) => data.id_motor === motor.id_motor)
-
-        const timeline = _.map(motorLog, (data) => Number(data.status || 0))
-
-        return !!_.reverse(timeline)[0] ? "ATIVO" : "DESATIVADO"
-    }
-
     return (
         <Container>
             {!!motors.length
@@ -37,9 +29,9 @@ export default function Motors({ data }: any) {
                                 </div>
                                 <div
                                     className="content-status"
-                                    data-status={status(motor)}
+                                    data-status={!!motor.status ? "ATIVO" : "DESATIVADO"}
                                 >
-                                    {_.lowerCase(status(motor))}
+                                    {_.lowerCase(!!motor.status ? "ATIVO" : "DESATIVADO")}
                                 </div>
                             </div>
                             <div className="content-footer">
