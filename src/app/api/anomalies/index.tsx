@@ -3,7 +3,7 @@ import _ from "lodash"
 
 export async function getAnomalies(credentials?: any) {
     try {
-        const { data } = await api.get("fault-detection", { params: credentials })
+        const { data } = await api.get("anomaly-detection", { params: credentials })
 
         return {
             ...data,
