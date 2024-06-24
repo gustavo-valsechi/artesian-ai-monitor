@@ -23,7 +23,8 @@ export default function Profile(props: IProps) {
         {
             icon: "fa-solid fa-user",
             label: "Alterar perfil",
-            function: () => { }
+            function: () => { },
+            disabled: true
         },
         {
             icon: "fa-solid fa-arrow-right-from-bracket",
@@ -55,7 +56,12 @@ export default function Profile(props: IProps) {
                     </div>
                     <div className="profile-menu">
                         {_.map(menu, (data, index) =>
-                            <div key={index} className="profile-menu-item" onClick={data.function}>
+                            <div
+                                key={index}
+                                className="profile-menu-item"
+                                onClick={data.function}
+                                data-disabled={String(!!data.disabled)}
+                            >
                                 <div><i aria-hidden className={data.icon} /></div>
                                 <label>{data.label}</label>
                             </div>

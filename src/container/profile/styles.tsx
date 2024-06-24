@@ -64,6 +64,11 @@ export const Container: any = styled.aside<{ show: boolean }>`
                     color: ${({ theme }) => theme.transparent_8};
                 }
 
+                &[data-disabled="true"] {
+                    opacity: .5;
+                    pointer-events: none;
+                }
+
                 div {
                     flex: 0.2;
                     display: flex;
