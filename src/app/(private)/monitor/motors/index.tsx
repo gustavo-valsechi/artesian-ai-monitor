@@ -11,7 +11,6 @@ import motorIcon from "@/assets/motor.png"
 export default function Motors({ data }: any) {
 
     const motors = data?.motors?.content || []
-    const monitor = data?.variables?.content || []
 
     return (
         <Container>
